@@ -34,5 +34,16 @@
     "dependencies": {
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": " env FORCE_COLOR=1 npx lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint --fix",
+            "prettier --config .prettierrc.json --write"
+        ]
     }
 }
