@@ -25,16 +25,15 @@ const config = {
             },
             {
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                        options: {
-                            minimize: false,
-                        },
-                    },
-                ],
+                use: ['html-loader'],
             },
         ],
+    },
+
+    devServer: {
+        contentBase: path.join(__dirname, 'public'),
+        compress: true,
+        port: 3000,
     },
 };
 
