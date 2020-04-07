@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
@@ -14,6 +15,9 @@ const config = {
             filename: 'index.html',
             template: 'src/template.html',
         }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contentHash].css',
+        }),
         new CleanWebpackPlugin(),
     ],
 
@@ -27,6 +31,21 @@ const config = {
             {
                 test: /\.html$/,
                 use: ['html-loader'],
+            },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                        },
+                    },
+                ],
             },
         ],
     },
