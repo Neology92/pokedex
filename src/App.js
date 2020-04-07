@@ -1,29 +1,30 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import React from 'react';
-import Home from './Pages/Home';
+import Pokedex from './Pages/Pokedex';
 import GlobalStyles from './Assets/Styles/GlobalStyles';
+import theme from './Assets/Styles/theme';
 
 import './Assets/Styles/VT323.css';
 
 class App extends React.PureComponent {
     render() {
         return (
-            <div>
+            <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                <h1>App</h1>
-                <hr />
-                <Home />
-                <Rectangle />
-            </div>
+                <Container>
+                    <Pokedex />
+                </Container>
+            </ThemeProvider>
         );
     }
 }
 
-const Rectangle = styled.div`
-    width: 200px;
-    height: 100px;
+const Container = styled.main`
+    width: 100vw;
 
-    background: red;
+    ${theme.media.above.m} {
+        width: 80vw;
+    }
 `;
 
 export default App;
