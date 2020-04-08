@@ -21,15 +21,15 @@ class Pokedex extends React.PureComponent {
                         inner
                     </Card>
                     <Button color="#0FEAC9">text</Button>
-                    <Button color="#0FEAC9">text</Button>
-                    <Button color="#0FEAC9">text</Button>
-                    <Button color="#0FEAC9">text</Button>
+                    <Button color="#DDCE43">text</Button>
+                    <Button color="#FB2EFF">text</Button>
+                    <Button color="#77DE82">text</Button>
                 </LeftWing>
                 <VerticalConnector />
                 <RightWing>
                     <FilterButtonsGroup>
-                        <Button color="#0FEAC9">text</Button>
-                        <Button color="#0FEAC9">text</Button>
+                        <Button color="#48CB4D">text</Button>
+                        <Button color="#FA9C45">text</Button>
                     </FilterButtonsGroup>
                     <Card
                         width="100%"
