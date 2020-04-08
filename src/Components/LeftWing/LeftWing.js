@@ -1,13 +1,16 @@
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import CameraEye from '../CameraEye/CameraEye';
 
 export default class LeftWing extends PureComponent {
     render() {
         const { children } = this.props;
         return (
             <Wrapper>
-                <Topping>.</Topping>
+                <Topping>
+                    <CameraEye />
+                </Topping>
                 <Inside>{children}</Inside>
             </Wrapper>
         );
@@ -17,6 +20,9 @@ export default class LeftWing extends PureComponent {
 const Topping = styled.div`
     width: 100%;
     height: 234px;
+
+    box-sizing: border-box;
+    padding: 50px 0 0 25px;
 
     border-radius: 20px 0;
     clip-path: polygon(100% 0, 100% 50%, 71% 50%, 28% 100%, 0 100%, 0 0);
