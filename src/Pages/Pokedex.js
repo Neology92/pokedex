@@ -21,9 +21,24 @@ class Pokedex extends React.PureComponent {
                         inner
                     </Card>
                     <Button color="#0FEAC9">text</Button>
+                    <Button color="#0FEAC9">text</Button>
+                    <Button color="#0FEAC9">text</Button>
+                    <Button color="#0FEAC9">text</Button>
                 </LeftWing>
                 <VerticalConnector />
-                <RightWing>right</RightWing>
+                <RightWing>
+                    <FilterButtonsGroup>
+                        <Button color="#0FEAC9">text</Button>
+                        <Button color="#0FEAC9">text</Button>
+                    </FilterButtonsGroup>
+                    <Card
+                        width="100%"
+                        height="85%"
+                        style={{ alignSelf: 'end' }}
+                    >
+                        inner
+                    </Card>
+                </RightWing>
             </Wrapper>
         );
     }
@@ -62,6 +77,10 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.media.above.xl} {
         width: 80vw;
     }
+`;
+
+const FilterButtonsGroup = styled.div`
+    margin: 20px 0;
 `;
 
 export default Pokedex;

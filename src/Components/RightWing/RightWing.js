@@ -10,15 +10,23 @@ export default class RightWing extends PureComponent {
 }
 
 const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
     box-sizing: border-box;
     width: 100%;
     height: 760px;
 
-    padding: 40px;
+    padding: 20px;
     margin-top: -40px;
 
     clip-path: polygon(0 0, 29% 0, 62% 5%, 100% 5%, 100% 100%, 0 100%);
     background: ${({ theme }) => theme.color.red};
+
+    ${({ theme }) => theme.media.above.m} {
+        padding: 40px;
+    }
 
     ${({ theme }) => theme.media.above.m} {
         width: 585px;

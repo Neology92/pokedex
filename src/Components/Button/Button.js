@@ -4,7 +4,6 @@ const Button = styled.button`
     min-width: 100px;
 
     padding: 8px 20px;
-    margin: 10px 18px;
 
     background-color: ${(props) => props.color};
 
