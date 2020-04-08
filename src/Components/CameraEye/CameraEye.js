@@ -12,8 +12,8 @@ export default class CameraEye extends PureComponent {
 }
 
 const Border = styled.div`
-    width: 100px;
-    height: 100px;
+    height: calc(60px + 6vw);
+    width: calc(60px + 6vw);
 
     display: flex;
     align-items: center;
@@ -21,6 +21,13 @@ const Border = styled.div`
 
     border-radius: 150px;
     background: ${({ theme }) => theme.color.white};
+
+    ${({ theme }) => theme.media.above.xl} {
+        height: 8vw;
+        width: 8vw;
+        max-width: 150px;
+        max-height: 150px;
+    }
 `;
 
 const Lens = styled.div`
@@ -56,6 +63,10 @@ const Lens = styled.div`
     }
 
     ${({ theme }) => theme.media.above.m} {
+        border: 6px solid ${({ theme }) => theme.color.black};
+    }
+
+    ${({ theme }) => theme.media.above.xl} {
         border: 7px solid ${({ theme }) => theme.color.black};
     }
 `;

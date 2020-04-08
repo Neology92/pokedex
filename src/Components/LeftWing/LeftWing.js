@@ -51,6 +51,13 @@ const Wrapper = styled.div`
 
     ${({ theme }) => theme.media.above.m} {
         width: 585px;
+        height: 800px;
+        border-radius: 20px 0 0 20px;
+    }
+
+    ${({ theme }) => theme.media.above.xl} {
+        width: 585px;
+        height: 875px;
         border-radius: 20px 0 0 20px;
     }
 `;

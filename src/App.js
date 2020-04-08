@@ -22,7 +22,8 @@ class App extends React.PureComponent {
 const Container = styled.main`
     width: 100vw;
 
-    ${theme.media.above.m} {
+    ${theme.media.above.xl} {
+        margin: 0 auto;
         width: 80vw;
     }
 `;
