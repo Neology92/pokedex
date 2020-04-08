@@ -35,14 +35,6 @@ const Wrapper = styled.div`
     }
 `;
 
-const FilterButtonsGroup = styled.div`
-    margin: 20px 0;
-    display: grid;
-    grid-template-rows: 1;
-    grid-template-columns: 100px 100px;
-    grid-column-gap: 16px;
-`;
-
 const CrossButtons = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 34px);
@@ -72,4 +64,47 @@ const CrossButtons = styled.div`
     }
 `;
 
-export { Wrapper, FilterButtonsGroup, CrossButtons };
+const FilterButtonsGroup = styled.div`
+    margin: 20px 0;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 100px 100px;
+    grid-column-gap: 16px;
+`;
+
+const GamepadButtonsGroup = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 20px 20px 50px;
+    grid-column-gap: 12px;
+    grid-row-gap: 10px;
+
+    align-items: center;
+
+    & > *:nth-child(1) {
+        grid-area: 1 / 1 / 3 / 2;
+    }
+    & > *:nth-child(2) {
+        grid-area: 2 / 2 / 3 / 3;
+        justify-self: center;
+    }
+    & > *:nth-child(3) {
+        grid-area: 3 /1 / 3 / 2;
+    }
+    & > *:nth-child(4) {
+        grid-area: 3 / 2 / 4 / 3;
+        justify-self: center;
+    }
+    & > *:nth-child(5) {
+        grid-area: 1 / 3 / 4 / 4;
+        justify-self: center;
+    }
+
+    ${({ theme }) => theme.media.above.m} {
+        grid-template-rows: 30px 30px 50px;
+        grid-column-gap: 16px;
+        grid-row-gap: 20px;
+    }
+`;
+
+export { Wrapper, FilterButtonsGroup, CrossButtons, GamepadButtonsGroup };
