@@ -6,6 +6,7 @@ import {
     VerticalConnector,
     Button,
     Card,
+    ArrowButton,
 } from '../Components';
 
 class Pokedex extends React.PureComponent {
@@ -24,6 +25,13 @@ class Pokedex extends React.PureComponent {
                     <Button color="#DDCE43">text</Button>
                     <Button color="#FB2EFF">text</Button>
                     <Button color="#77DE82">text</Button>
+                    <CrossButtons>
+                        <ArrowButton direction="top" />
+                        <ArrowButton direction="left" />
+                        <div />
+                        <ArrowButton direction="right" />
+                        <ArrowButton direction="bottom" />
+                    </CrossButtons>
                 </LeftWing>
                 <VerticalConnector />
                 <RightWing>
@@ -85,6 +93,31 @@ const FilterButtonsGroup = styled.div`
     grid-template-rows: 1;
     grid-template-columns: 100px 100px;
     grid-column-gap: 16px;
+`;
+
+const CrossButtons = styled.div`
+    display: grid;
+    grid-template-columns: repeat(5, 42px);
+    grid-template-rows: repeat(5, 42px);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    & > *:nth-child(1) {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+    & > *:nth-child(2) {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    & > *:nth-child(3) {
+        grid-area: 2 / 2 / 3 / 3;
+        background: ${({ theme }) => theme.color.black};
+    }
+    & > *:nth-child(4) {
+        grid-area: 2 / 3 / 3 / 4;
+    }
+    & > *:nth-child(5) {
+        grid-area: 3 / 2 / 4 / 3;
+    }
 `;
 
 export default Pokedex;
