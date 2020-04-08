@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import React from 'react';
-import { LeftWing, RightWing, VerticalConnector } from '../Components';
+import { LeftWing, RightWing, VerticalConnector, Button } from '../Components';
 
 class Pokedex extends React.PureComponent {
     render() {
         return (
             <Wrapper>
-                <LeftWing>left</LeftWing>
+                <LeftWing>
+                    <Button color="#0FEAC9">text</Button>
+                </LeftWing>
                 <VerticalConnector />
                 <RightWing>right</RightWing>
             </Wrapper>
