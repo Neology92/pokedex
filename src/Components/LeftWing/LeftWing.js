@@ -41,7 +41,13 @@ const Inside = styled.div`
 
     /* clip-path: polygon(100% 0, 100% 64%, 71% 64%, 28% 100%, 0 100%, 0 0); */
     /* background: ${({ theme }) => theme.color.red}; */
+    padding: 20px;
+
+    ${({ theme }) => theme.media.above.s}{
     padding: 40px;
+
+    }
+
 `;
 
 const Wrapper = styled.div`
