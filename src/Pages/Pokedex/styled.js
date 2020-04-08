@@ -83,6 +83,7 @@ const GamepadButtonsGroup = styled.div`
 
     & > *:nth-child(1) {
         grid-area: 1 / 1 / 3 / 2;
+        justify-self: center;
     }
     & > *:nth-child(2) {
         grid-area: 2 / 2 / 3 / 3;

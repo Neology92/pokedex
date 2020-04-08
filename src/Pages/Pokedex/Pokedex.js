@@ -6,7 +6,9 @@ import {
     Button,
     Card,
     ArrowButton,
+    Pokeball,
 } from '../../Components';
+
 import {
     Wrapper,
     FilterButtonsGroup,
@@ -27,7 +29,7 @@ class Pokedex extends React.PureComponent {
                         inner
                     </Card>
                     <GamepadButtonsGroup>
-                        <Button color="#FB2EFF">Pokeball</Button>
+                        <Pokeball />
                         <Button color="#DDCE43">Random</Button>
                         <Button color="#FB2EFF">Your Pokemons</Button>
                         <Button color="#77DE82">Previous</Button>
