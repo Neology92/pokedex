@@ -21,6 +21,7 @@ const Border = styled.div`
 
     border-radius: 150px;
     background: ${({ theme }) => theme.color.white};
+    ${({ theme }) => theme.shadow[0]};
 
     ${({ theme }) => theme.media.above.xl} {
         height: 8vw;

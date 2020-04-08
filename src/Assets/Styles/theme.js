@@ -21,6 +21,8 @@ const theme = {
         },
     },
 
+    shadow: ['box-shadow: 4px 6px 10px -2px rgba(0,0,0,0.75);'],
+
     media: {
         above: {
             xl: '@media (min-width: 1700px)',
