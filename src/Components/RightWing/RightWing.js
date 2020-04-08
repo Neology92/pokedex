@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     width: 100%;
     height: 760px;
+
     padding: 40px;
     margin-top: -40px;
 
@@ -21,9 +22,14 @@ const Wrapper = styled.div`
 
     ${({ theme }) => theme.media.above.m} {
         width: 585px;
+        height: 685px;
         margin-top: 115px;
         border-radius: 0 0 20px 0;
         clip-path: polygon(0 0, 29% 0, 62% 15%, 100% 15%, 100% 100%, 0 100%);
+    }
+
+    ${({ theme }) => theme.media.above.xl} {
+        height: 760px;
     }
 `;
 

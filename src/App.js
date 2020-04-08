@@ -1,8 +1,9 @@
-import styled, { ThemeProvider } from 'styled-components';
 import React from 'react';
-import Pokedex from './Pages/Pokedex';
+import styled, { ThemeProvider } from 'styled-components';
 import GlobalStyles from './Assets/Styles/GlobalStyles';
 import theme from './Assets/Styles/theme';
+import Pokedex from './Pages/Pokedex';
+import { Background } from './Components';
 
 import './Assets/Styles/VT323.css';
 
@@ -12,6 +13,7 @@ class App extends React.PureComponent {
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
                 <Container>
+                    <Background />
                     <Pokedex />
                 </Container>
             </ThemeProvider>
@@ -21,11 +23,6 @@ class App extends React.PureComponent {
 
 const Container = styled.main`
     width: 100vw;
-
-    ${theme.media.above.xl} {
-        margin: 0 auto;
-        width: 80vw;
-    }
 `;
 
 export default App;

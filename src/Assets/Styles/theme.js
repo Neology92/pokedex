@@ -25,7 +25,7 @@ const theme = {
         above: {
             xl: '@media (min-width: 1700px)',
             l: '@media (min-width: 1330px)',
-            m: '@media (min-width: 768px)',
+            m: '@media (min-width: 1000px)',
             s: '@media (min-width: 480px)',
             xs: '@media (min-width: 360px)',
         },

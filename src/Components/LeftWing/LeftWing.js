@@ -37,7 +37,7 @@ const Topping = styled.div`
 const Inside = styled.div`
     box-sizing: border-box;
     width: 100%;
-    height: 640px;
+    height: 70%;
 
     /* clip-path: polygon(100% 0, 100% 64%, 71% 64%, 28% 100%, 0 100%, 0 0); */
     /* background: ${({ theme }) => theme.color.red}; */
