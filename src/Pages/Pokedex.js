@@ -81,6 +81,10 @@ const Wrapper = styled.div`
 
 const FilterButtonsGroup = styled.div`
     margin: 20px 0;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 100px 100px;
+    grid-column-gap: 16px;
 `;
 
 export default Pokedex;
