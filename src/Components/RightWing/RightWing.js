@@ -11,14 +11,20 @@ export default class RightWing extends PureComponent {
 
 const Wrapper = styled.div`
     box-sizing: border-box;
-    width: 585px;
+    width: 100%;
     height: 760px;
-    margin-top: 115px;
     padding: 40px;
+    margin-top: -40px;
 
-    border-radius: 0 0 20px 0;
-    clip-path: polygon(0 0, 29% 0, 62% 15%, 100% 15%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 29% 0, 62% 5%, 100% 5%, 100% 100%, 0 100%);
     background: ${({ theme }) => theme.color.red};
+
+    ${({ theme }) => theme.media.above.m} {
+        width: 585px;
+        margin-top: 115px;
+        border-radius: 0 0 20px 0;
+        clip-path: polygon(0 0, 29% 0, 62% 15%, 100% 15%, 100% 100%, 0 100%);
+    }
 `;
 
 RightWing.propTypes = {

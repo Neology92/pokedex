@@ -15,13 +15,17 @@ class Pokedex extends React.PureComponent {
 }
 
 const Wrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
-
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100vw;
+
+    ${({ theme }) => theme.media.above.m} {
+        height: 100vh;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 
 export default Pokedex;
