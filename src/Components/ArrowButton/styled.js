@@ -7,8 +7,14 @@ const ArrowButtonBase = styled.button`
     cursor: pointer;
     background: ${({ theme }) => theme.color.black};
 
-    position: relative;
+    ${({ theme }) => theme.shadow[0]};
+    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+    &:active {
+        box-shadow: none;
+        transform: translateY(2px);
+    }
 
+    position: relative;
     &:before {
         display: block;
         content: '';
@@ -58,7 +64,6 @@ const ArrowLeft = styled(ArrowButtonBase)`
 const ArrowRight = styled(ArrowButtonBase)`
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-
     &:before {
         border-left: 10px solid ${({ theme }) => theme.color.grey[4]};
         border-right: 0;

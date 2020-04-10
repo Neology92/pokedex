@@ -9,7 +9,7 @@ const theme = {
         black: '#1B1B1B',
     },
 
-    shadow: ['box-shadow: 4px 6px 10px -2px rgba(0,0,0,0.75);'],
+    shadow: ['box-shadow: 4px 6px 10px -2px rgba(27,27,27,0.75);'],
 
     media: {
         above: {

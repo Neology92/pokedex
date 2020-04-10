@@ -51,6 +51,7 @@ const CrossButtons = styled.div`
     & > *:nth-child(3) {
         grid-area: 2 / 2 / 3 / 3;
         background: ${({ theme }) => theme.color.black};
+        height: 50px;
     }
     & > *:nth-child(4) {
         grid-area: 2 / 3 / 3 / 4;

@@ -14,6 +14,15 @@ const Pokeball = styled.button`
     position: relative;
     overflow: hidden;
 
+    ${({ theme }) => theme.shadow[0]};
+    cursor: pointer;
+
+    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+    &:active {
+        box-shadow: none;
+        transform: translateY(2px);
+    }
+
     &:before {
         content: '';
         width: 100%;
