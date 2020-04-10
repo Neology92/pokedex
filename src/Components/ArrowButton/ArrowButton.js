@@ -4,17 +4,17 @@ import { ArrowLeft, ArrowRight, ArrowTop, ArrowBottom } from './styled';
 
 export default class ArrowButton extends PureComponent {
     renderArrow() {
-        const { direction } = this.props;
+        const { direction, onClick } = this.props;
 
         switch (direction) {
             case 'left':
-                return <ArrowLeft />;
+                return <ArrowLeft onClick={onClick} />;
             case 'right':
-                return <ArrowRight />;
+                return <ArrowRight onClick={onClick} />;
             case 'top':
-                return <ArrowTop />;
+                return <ArrowTop onClick={onClick} />;
             case 'bottom':
-                return <ArrowBottom />;
+                return <ArrowBottom onClick={onClick} />;
             default:
                 return null;
         }
@@ -27,4 +27,9 @@ export default class ArrowButton extends PureComponent {
 
 ArrowButton.propTypes = {
     direction: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+};
+
+ArrowButton.defaultProps = {
+    onClick: null,
 };

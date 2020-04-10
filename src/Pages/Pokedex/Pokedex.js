@@ -16,8 +16,55 @@ import {
     GamepadButtonsGroup,
 } from './styled';
 
+import pokeApiQuery from '../../Utils/pokeApiQuery';
+
 class Pokedex extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pokemonId: 1,
+            maxPokemonId: 1,
+            isLoading: true,
+        };
+
+        this.nextPokemon = this.nextPokemon.bind(this);
+        this.previousPokemon = this.previousPokemon.bind(this);
+    }
+
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+        const {
+            data: { count },
+        } = await pokeApiQuery('pokemon');
+        this.setState({ maxPokemonId: count });
+        this.setState({ isLoading: false });
+    }
+
+    nextPokemon() {
+        const { pokemonId, maxPokemonId, isLoading } = this.state;
+        if (!isLoading) {
+            let nextPokemon = pokemonId;
+            if (pokemonId < maxPokemonId) {
+                nextPokemon += 1;
+            }
+            this.setState({ pokemonId: nextPokemon });
+        }
+    }
+
+    previousPokemon() {
+        const { pokemonId, isLoading } = this.state;
+        if (!isLoading) {
+            let previousPokemon = pokemonId;
+            if (pokemonId > 1) {
+                previousPokemon -= 1;
+            }
+            this.setState({ pokemonId: previousPokemon });
+        }
+    }
+
     render() {
+        const { pokemonId } = this.state;
+
         return (
             <Wrapper>
                 <LeftWing>
@@ -25,6 +72,7 @@ class Pokedex extends React.PureComponent {
                         width="100%"
                         height="70%"
                         style={{ marginBottom: '30px' }}
+                        pokemonId={pokemonId}
                     />
                     <GamepadButtonsGroup>
                         <Pokeball />
@@ -33,9 +81,15 @@ class Pokedex extends React.PureComponent {
                         <Button color="#77DE82">Previous</Button>
                         <CrossButtons>
                             <ArrowButton direction="top" />
-                            <ArrowButton direction="left" />
+                            <ArrowButton
+                                direction="left"
+                                onClick={this.previousPokemon}
+                            />
                             <div />
-                            <ArrowButton direction="right" />
+                            <ArrowButton
+                                direction="right"
+                                onClick={this.nextPokemon}
+                            />
                             <ArrowButton direction="bottom" />
                         </CrossButtons>
                     </GamepadButtonsGroup>
