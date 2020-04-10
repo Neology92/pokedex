@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
     },
     "extends": [
         "airbnb",
@@ -9,6 +10,8 @@
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
+        "plugin:jest/recommended",
+        "plugin:jest/style",
         "prettier",
         "prettier/react"
     ],
@@ -23,7 +26,7 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["react", "react-hooks", "jsx-a11y"],
+    "plugins": ["react", "react-hooks", "jsx-a11y", "jest"],
     "rules": {
         "react/jsx-filename-extension": 0,
         "react/react-in-jsx-scope": 0,
