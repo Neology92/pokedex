@@ -18,19 +18,15 @@ const Topping = styled.div`
 `;
 
 const Inside = styled.div`
-box-sizing: border-box;
-width: 100%;
-height: 70%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70%;
 
-/* clip-path: polygon(100% 0, 100% 64%, 71% 64%, 28% 100%, 0 100%, 0 0); */
-/* background: ${({ theme }) => theme.color.red}; */
-padding: 20px;
+    padding: 20px;
 
-${({ theme }) => theme.media.above.s}{
-padding: 40px;
-
-}
-
+    ${({ theme }) => theme.media.above.s} {
+        padding: 20px;
+    }
 `;
 
 const Wrapper = styled.div`
@@ -38,6 +34,9 @@ const Wrapper = styled.div`
     width: 100%;
     height: 875px;
 
+    ${({ theme }) => theme.media.above.s} {
+        width: 480px;
+    }
     ${({ theme }) => theme.media.above.m} {
         width: 585px;
         height: 800px;
@@ -45,9 +44,7 @@ const Wrapper = styled.div`
     }
 
     ${({ theme }) => theme.media.above.xl} {
-        width: 585px;
         height: 875px;
-        border-radius: 20px 0 0 20px;
     }
 `;
 

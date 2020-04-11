@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Card from '../Card/Card';
 import PokemonItem from '../PokemonItem/PokemonItem';
+import { Grid, Wrapper } from './styled';
 
 export default class PokemonList extends PureComponent {
     render() {
@@ -9,21 +9,21 @@ export default class PokemonList extends PureComponent {
         const { page, pokemonsList, isLoading, ...props } = this.props;
 
         return (
-            <Card {...props}>
+            <Wrapper {...props}>
                 {isLoading ? (
                     <h1>Loading...</h1>
                 ) : (
-                    <>
-                        {pokemonsList.slice(0, 5).map((pokemon) => (
+                    <Grid>
+                        {pokemonsList.slice(0, 20).map((pokemon) => (
                             <PokemonItem
                                 name={pokemon.name}
                                 sprite={pokemon.sprites.front_default}
                                 key={pokemon.id}
                             />
                         ))}
-                    </>
+                    </Grid>
                 )}
-            </Card>
+            </Wrapper>
         );
     }
 }

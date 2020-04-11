@@ -9,16 +9,17 @@ const Wrapper = styled.div`
 
     box-sizing: border-box;
     width: 100%;
-    height: 760px;
+    height: 850px;
 
     padding: 20px;
-    margin-top: -40px;
+    margin-top: -100px;
 
     clip-path: polygon(0 0, 29% 0, 62% 5%, 100% 5%, 100% 100%, 0 100%);
     background: ${({ theme }) => theme.color.red};
 
-    ${({ theme }) => theme.media.above.m} {
-        padding: 40px;
+    ${({ theme }) => theme.media.above.s} {
+        width: 480px;
+        height: 700px;
     }
 
     ${({ theme }) => theme.media.above.m} {

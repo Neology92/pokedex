@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 
     background: rgb(173, 173, 173, 0.73);
 
     ${({ theme }) => theme.media.above.s} {
-        padding: 0 10vw;
-        width: 80vw;
+        margin: 0 auto;
+        width: 100vw;
+        align-items: center;
     }
 
     ${({ theme }) => theme.media.above.m} {
