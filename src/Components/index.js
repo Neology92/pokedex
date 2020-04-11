@@ -6,6 +6,8 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import ArrowButton from './ArrowButton/ArrowButton';
 import Pokeball from './Pokeball/Pokeball';
+import PokemonDetails from './PokemonDetails/PokemonDetails';
+import PokemonsGrid from './PokemonsGrid/PokemonsGrid';
 
 export {
     LeftWing,
@@ -16,4 +18,6 @@ export {
     Card,
     ArrowButton,
     Pokeball,
+    PokemonDetails,
+    PokemonsGrid,
 };

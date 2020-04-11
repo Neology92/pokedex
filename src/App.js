@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import GlobalStyles from './Assets/Styles/GlobalStyles';
 import theme from './Assets/Styles/theme';
-import Pokedex from './Pages/Pokedex/Pokedex';
+import Home from './Pages/Home';
 import { Background } from './Components';
 
 import './Assets/Styles/VT323.css';
@@ -14,7 +14,7 @@ class App extends React.PureComponent {
                 <GlobalStyles />
                 <Container>
                     <Background />
-                    <Pokedex />
+                    <Home />
                 </Container>
             </ThemeProvider>
         );

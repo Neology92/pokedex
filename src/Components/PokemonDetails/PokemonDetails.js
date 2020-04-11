@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../Components/Card/Card';
+import Card from '../Card/Card';
 import getPokemon from '../../Utils/getPokemon';
 
 export default class PokemonDetails extends PureComponent {
