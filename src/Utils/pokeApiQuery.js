@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-const pokeApiQuery = async (query) => {
-    const url = `https://pokeapi.co/api/v2/${query}/`;
-
-    try {
-        const res = await axios.get(url);
-        return res;
-    } catch (err) {
-        console.error(err);
-        return null;
-    }
+const pokeApiQuery = (query) => {
+    return new Promise((resolve, reject) => {
+        const url = `https://pokeapi.co/api/v2/${query}/`;
+        try {
+            const res = axios.get(url);
+            resolve(res);
+        } catch (err) {
+            console.error(err);
+            reject(err);
+        }
+    });
 };
 
 export default pokeApiQuery;

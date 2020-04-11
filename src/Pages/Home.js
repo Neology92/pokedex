@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Pokedex from '../Layouts/Pokedex/Pokedex';
 import { PokemonDetails, PokemonsGrid } from '../Components';
 
@@ -25,19 +26,28 @@ class Home extends React.PureComponent {
         this.getPokemons();
     }
 
-    async getPokemons() {
+    getPokemons() {
         this.setState({ isLoading: true });
-        const {
-            data: { count, results },
-        } = await pokeApiQuery('pokemon?limit=999');
-        const numOfPages = Math.ceil(count / 20.0);
 
-        this.setState({
-            maxPokemonId: count,
-            pokemonsList: results,
-            pages: numOfPages,
-            isLoading: false,
-        });
+        pokeApiQuery('pokemon?limit=999')
+            .then(async ({ data: { count, results } }) => {
+                const pokemonsList = await Promise.all(
+                    results.map(async (record) => {
+                        const { data } = await axios.get(record.url);
+                        return data;
+                    })
+                );
+
+                return { count, pokemonsList };
+            })
+            .then(({ count, pokemonsList }) => {
+                const pages = Math.ceil(count / 20.0);
+
+                this.setState({ pages });
+                this.setState({ pokemonsList });
+                this.setState({ maxPokemonId: count });
+                this.setState({ isLoading: false });
+            });
     }
 
     setPage(num) {

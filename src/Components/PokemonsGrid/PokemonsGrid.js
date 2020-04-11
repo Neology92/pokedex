@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
+import PokemonItem from '../PokemonItem/PokemonItem';
 
 export default class PokemonList extends PureComponent {
     render() {
@@ -12,9 +13,15 @@ export default class PokemonList extends PureComponent {
                 {isLoading ? (
                     <h1>Loading...</h1>
                 ) : (
-                    <div>
-                        <h1>Page: {page}</h1>
-                    </div>
+                    <>
+                        {pokemonsList.slice(0, 5).map((pokemon) => (
+                            <PokemonItem
+                                name={pokemon.name}
+                                sprite={pokemon.sprites.front_default}
+                                key={pokemon.id}
+                            />
+                        ))}
+                    </>
                 )}
             </Card>
         );
