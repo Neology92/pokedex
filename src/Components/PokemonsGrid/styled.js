@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(7, 80px);
     grid-column-gap: calc(25vw - 75px);
     grid-row-gap: 10px;
 
@@ -14,15 +15,10 @@ const Grid = styled.div`
     }
 
     ${({ theme }) => theme.media.above.m} {
-        grid-template-columns: repeat(4, 80px);
-        grid-template-rows: repeat(5, 80px);
         grid-column-gap: calc(4.55vw - 30px);
-        /* grid-column-gap: 30px; */
     }
 
     ${({ theme }) => theme.media.above.l} {
-        grid-template-columns: repeat(4, 80px);
-        grid-template-rows: repeat(5, 80px);
         grid-column-gap: 30px;
     }
 
