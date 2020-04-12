@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import InfoTable from '../InfoTable/InfoTable';
+import Picture from '../Picture/Picture';
 import { Wrapper, Name, StyledCard } from './styled';
 
 const asThreeDigit = (num) => {
@@ -17,19 +18,11 @@ export default class PokemonDetails extends PureComponent {
                     <Wrapper>
                         <Name>{pokemon.name}</Name>
                         <Name>#{asThreeDigit(pokemon.id)}</Name>
-                        {/* <img
-                            style={{ height: '100%' }}
+                        <Picture
                             src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
-                            alt=""
-                        /> */}
-
-                        <div
-                            style={{
-                                backgroundColor: 'green',
-                                width: '100%',
-                                height: '100%',
-                            }}
+                            name={pokemon.name}
                         />
+
                         <InfoTable />
                     </Wrapper>
                 ) : (
