@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Img from 'react-image';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -38,7 +39,7 @@ const Wrapper = styled.div`
     }
 `;
 
-const Img = styled.img`
+const StyledImg = styled(Img)`
     height: 70%;
     max-height: 180px;
     z-index: 1;
@@ -50,4 +51,11 @@ const Img = styled.img`
     }
 `;
 
-export { Wrapper, Img };
+const Placeholder = styled(StyledImg)`
+    height: 90px;
+    width: 90px;
+    filter: grayscale(1) contrast(0) blur(2px) brightness(0.4) invert();
+    transform: scale(1.5);
+`;
+
+export { Wrapper, StyledImg, Placeholder };

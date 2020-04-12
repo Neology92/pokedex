@@ -21,6 +21,7 @@ export default class PokemonDetails extends PureComponent {
                         <Picture
                             src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
                             name={pokemon.name}
+                            placeholder={pokemon.sprites.front_default}
                         />
 
                         <InfoTable />
@@ -37,6 +38,9 @@ PokemonDetails.propTypes = {
     pokemon: PropTypes.shape({
         name: PropTypes.string,
         id: PropTypes.number,
+        sprites: PropTypes.shape({
+            front_default: PropTypes.string,
+        }),
     }),
 
     isReady: PropTypes.bool.isRequired,
