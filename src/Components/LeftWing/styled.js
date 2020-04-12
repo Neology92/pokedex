@@ -22,24 +22,25 @@ const Inside = styled.div`
     width: 100%;
     height: 70%;
 
-    padding: 20px;
+    padding: calc(16.67vw - 40px);
 
     ${({ theme }) => theme.media.above.s} {
-        padding: 20px;
+        padding: 40px;
     }
 `;
 
 const Wrapper = styled.div`
     background: ${({ theme }) => theme.color.lightRed};
+    padding-bottom: 60px;
     width: 100%;
-    height: 875px;
 
     ${({ theme }) => theme.media.above.s} {
         width: 480px;
     }
     ${({ theme }) => theme.media.above.m} {
-        width: 585px;
+        padding: 0;
         height: 800px;
+        width: 585px;
         border-radius: 20px 0 0 20px;
     }
 

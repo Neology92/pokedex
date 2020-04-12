@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const Card = styled.section`
-    width: ${({ width }) => width || '100px'};
+    width: 100%;
     height: ${({ height }) => height || '100px'};
 
     box-sizing: border-box;
-    padding: 18px 12px;
+    padding: 20px 15px;
 
     border-radius: 20px;
     background: ${({ color, theme }) => color || theme.color.white};

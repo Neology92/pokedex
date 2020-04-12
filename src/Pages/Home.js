@@ -110,8 +110,6 @@ class Home extends React.PureComponent {
             <Pokedex
                 leftSideComponent={
                     <PokemonDetails
-                        width="100%"
-                        height="70%"
                         style={{ marginBottom: '30px' }}
                         pokemon={pokemonsList[pokemonId - 1]}
                         isReady={isReady}
@@ -125,7 +123,6 @@ class Home extends React.PureComponent {
                         isReady={isReady}
                         isFetching={isFetching}
                         pokemonsList={pokemonsList.slice(0, 20)}
-                        width="100%"
                         height="85%"
                         style={{ alignSelf: 'end' }}
                     />

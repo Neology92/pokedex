@@ -11,8 +11,9 @@ const Wrapper = styled.div`
     width: 100%;
     height: 850px;
 
-    padding: 20px;
-    margin-top: -100px;
+    padding: calc(16.67vw - 40px);
+
+    margin-top: -50px;
 
     clip-path: polygon(0 0, 29% 0, 62% 5%, 100% 5%, 100% 100%, 0 100%);
     background: ${({ theme }) => theme.color.red};
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.media.above.s} {
         width: 480px;
         height: 700px;
+        padding: 40px;
     }
 
     ${({ theme }) => theme.media.above.m} {
