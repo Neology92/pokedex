@@ -16,83 +16,85 @@ class Home extends React.PureComponent {
             isReady: false,
             isFetching: false,
             page: 1,
-            pages: 1,
+            maxPage: 1,
         };
 
+        this.setPokemonId = this.setPokemonId.bind(this);
         this.nextPokemon = this.nextPokemon.bind(this);
         this.previousPokemon = this.previousPokemon.bind(this);
         this.getPokemons = this.getPokemons.bind(this);
-        this.getNextPokemonsPortion = this.getNextPokemonsPortion.bind(this);
+        // this.getNextPokemonsPortion = this.getNextPokemonsPortion.bind(this);
     }
 
     async componentDidMount() {
         this.getPokemons();
     }
 
-    getPokemons() {
-        this.setState({ isLoading: true });
+    async getPokemons() {
+        this.setState({ isFetching: true });
         this.setState({ isReady: false });
 
-        pokeApiQuery('pokemon?limit=999').then(
-            async ({ data: { count, results } }) => {
-                const pages = Math.ceil(count / 20.0);
-                this.setState({ pages });
+        const {
+            data: { count, results },
+        } = await pokeApiQuery('pokemon?limit=999');
 
-                // Load first chunk of pokemons
-                await this.getNextPokemonsPortion(0, 20, results);
-                this.setState({ isReady: true });
+        const pokemonsPerPage = 20;
+        const maxPage = Math.ceil(count / pokemonsPerPage);
+        this.setState({ maxPage });
 
-                this.getNextPokemonsPortion(20, count, results);
-                this.setState({ isLoading: false });
-            }
-        );
-    }
-
-    async getNextPokemonsPortion(from, maxId, results) {
-        const chunkSize = 10;
-        for (let i = from; i < maxId; i += chunkSize) {
+        // Split pokemons to smaller chunks before fetch
+        const chunkSize = pokemonsPerPage;
+        for (let i = 0; i < count; i += chunkSize) {
             const { pokemonsList } = this.state;
 
+            // Get promises of returning pokemons
             const promises = results
                 .slice(i, i + chunkSize)
                 .map(async (record) => {
                     const { data } = await axios.get(record.url);
                     return data;
                 });
+
+            // Wait for results
             const res = await Promise.all(promises);
 
             this.setState({ pokemonsList: pokemonsList.concat(res) });
             this.setState({ maxPokemonId: i + chunkSize });
+
+            // After first iteration allow to load first pokemons
+            if (i === 0) {
+                this.setState({ isReady: true });
+            }
         }
+        this.setState({ isFetching: false });
     }
 
     setPage(num) {
-        const { pages } = this.state;
-        if (num >= 1 && num <= pages) {
-            this.setState({ page: num });
+        const { maxPage, isFetching } = this.state;
+        if (!isFetching) {
+            if (num >= 1 && num <= maxPage) {
+                this.setState({ page: num });
+            }
+        }
+    }
+
+    setPokemonId(id) {
+        const { pokemonId, maxPokemonId, isReady } = this.state;
+        if (isReady) {
+            if (id >= 1 && id <= maxPokemonId && id !== pokemonId) {
+                this.setState({ pokemonId: id });
+            }
         }
     }
 
     nextPokemon() {
-        const { pokemonId, maxPokemonId, isLoading } = this.state;
-        if (!isLoading) {
-            let nextPokemon = pokemonId;
-            if (pokemonId < maxPokemonId) {
-                nextPokemon += 1;
-            }
-            this.setState({ pokemonId: nextPokemon });
-        }
+        const { pokemonId } = this.state;
+        this.setPokemonId(pokemonId + 1);
     }
 
     previousPokemon() {
-        const { pokemonId, isLoading } = this.state;
-        if (!isLoading) {
-            let previousPokemon = pokemonId;
-            if (pokemonId > 1) {
-                previousPokemon -= 1;
-            }
-            this.setState({ pokemonId: previousPokemon });
-        }
+        const { pokemonId } = this.state;
+        this.setPokemonId(pokemonId - 1);
     }
 
     render() {
@@ -102,6 +104,7 @@ class Home extends React.PureComponent {
             isReady,
             isFetching,
             page,
+            maxPage,
         } = this.state;
 
         return (
@@ -118,6 +121,7 @@ class Home extends React.PureComponent {
                 rightSideComponent={
                     <PokemonsGrid
                         page={page}
+                        maxPage={maxPage}
                         isReady={isReady}
                         isFetching={isFetching}
                         pokemonsList={pokemonsList.slice(0, 20)}
