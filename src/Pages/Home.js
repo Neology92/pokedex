@@ -120,6 +120,7 @@ class Home extends React.PureComponent {
                 }
                 rightSideComponent={
                     <PokemonsGrid
+                        setPokemonId={this.setPokemonId}
                         page={page}
                         maxPage={maxPage}
                         isReady={isReady}

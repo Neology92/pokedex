@@ -4,10 +4,10 @@ import { Wrapper, Img, Name } from './styled';
 
 export default class PokemonItem extends PureComponent {
     render() {
-        const { sprite, name } = this.props;
+        const { sprite, name, onClick, ...props } = this.props;
 
         return (
-            <Wrapper>
+            <Wrapper onClick={onClick} {...props}>
                 <Img src={sprite} alt={`${name} icon`} />
                 <Name>{name}</Name>
             </Wrapper>
@@ -18,4 +18,5 @@ export default class PokemonItem extends PureComponent {
 PokemonItem.propTypes = {
     sprite: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
