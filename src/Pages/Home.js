@@ -20,10 +20,9 @@ class Home extends React.PureComponent {
         };
 
         this.setPokemonId = this.setPokemonId.bind(this);
-        this.nextPokemon = this.nextPokemon.bind(this);
-        this.previousPokemon = this.previousPokemon.bind(this);
+        this.nextPokemonId = this.nextPokemonId.bind(this);
+        this.prevPokemonId = this.prevPokemonId.bind(this);
         this.getPokemons = this.getPokemons.bind(this);
-        // this.getNextPokemonsPortion = this.getNextPokemonsPortion.bind(this);
     }
 
     async componentDidMount() {
@@ -87,12 +86,12 @@ class Home extends React.PureComponent {
         }
     }
 
-    nextPokemon() {
+    nextPokemonId() {
         const { pokemonId } = this.state;
         this.setPokemonId(pokemonId + 1);
     }
 
-    previousPokemon() {
+    prevPokemonId() {
         const { pokemonId } = this.state;
         this.setPokemonId(pokemonId - 1);
     }
@@ -131,8 +130,8 @@ class Home extends React.PureComponent {
                         style={{ alignSelf: 'end' }}
                     />
                 }
-                previousPokemon={this.previousPokemon}
-                nextPokemon={this.nextPokemon}
+                prevPokemonId={this.prevPokemonId}
+                nextPokemonId={this.nextPokemonId}
             />
         );
     }

@@ -20,8 +20,8 @@ class Pokedex extends React.PureComponent {
         const {
             leftSideComponent,
             rightSideComponent,
-            previousPokemon,
-            nextPokemon,
+            prevPokemonId,
+            nextPokemonId,
         } = this.props;
 
         return (
@@ -37,12 +37,12 @@ class Pokedex extends React.PureComponent {
                             <ArrowButton direction="top" />
                             <ArrowButton
                                 direction="left"
-                                onClick={previousPokemon}
+                                onClick={prevPokemonId}
                             />
                             <div />
                             <ArrowButton
                                 direction="right"
-                                onClick={nextPokemon}
+                                onClick={nextPokemonId}
                             />
                             <ArrowButton direction="bottom" />
                         </CrossButtons>
@@ -64,8 +64,8 @@ class Pokedex extends React.PureComponent {
 Pokedex.propTypes = {
     leftSideComponent: PropTypes.node.isRequired,
     rightSideComponent: PropTypes.node.isRequired,
-    previousPokemon: PropTypes.func.isRequired,
-    nextPokemon: PropTypes.func.isRequired,
+    prevPokemonId: PropTypes.func.isRequired,
+    nextPokemonId: PropTypes.func.isRequired,
 };
 
 export default Pokedex;
