@@ -26,10 +26,6 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.media.above.l} {
         margin: 0 auto;
         min-width: 1330px;
-        width: 90vw;
-    }
-
-    ${({ theme }) => theme.media.above.xl} {
         width: 80vw;
     }
 `;

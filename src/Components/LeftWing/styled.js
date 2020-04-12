@@ -11,9 +11,12 @@ const Topping = styled.div`
 
     ${({ theme }) => theme.media.above.m} {
         padding: 50px 0 0 25px;
-        height: 234px;
-
+        height: 200px;
         border-radius: 20px 0;
+    }
+
+    ${({ theme }) => theme.media.above.xl} {
+        height: 234px;
     }
 `;
 

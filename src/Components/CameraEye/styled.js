@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Border = styled.div`
     height: calc(60px + 6vw);
     width: calc(60px + 6vw);
+    margin-left: 20px;
 
     display: flex;
     align-items: center;
@@ -12,6 +13,12 @@ const Border = styled.div`
     background: ${({ theme }) => theme.color.white};
     ${({ theme }) => theme.shadow[0]};
 
+    ${({ theme }) => theme.media.above.m} {
+        margin-left: 0;
+
+        height: 136px;
+        width: 136px;
+    }
     ${({ theme }) => theme.media.above.xl} {
         height: 8vw;
         width: 8vw;
