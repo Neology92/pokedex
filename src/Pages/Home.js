@@ -1,3 +1,4 @@
+/* eslint no-await-in-loop: 0 */
 import React from 'react';
 import axios from 'axios';
 import Pokedex from '../Layouts/Pokedex/Pokedex';
@@ -12,7 +13,8 @@ class Home extends React.PureComponent {
             pokemonId: 1,
             maxPokemonId: 1,
             pokemonsList: [],
-            isLoading: true,
+            isReady: false,
+            isFetching: false,
             page: 1,
             pages: 1,
         };
@@ -20,34 +22,48 @@ class Home extends React.PureComponent {
         this.nextPokemon = this.nextPokemon.bind(this);
         this.previousPokemon = this.previousPokemon.bind(this);
         this.getPokemons = this.getPokemons.bind(this);
+        this.getNextPokemonsPortion = this.getNextPokemonsPortion.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.getPokemons();
     }
 
     getPokemons() {
         this.setState({ isLoading: true });
+        this.setState({ isReady: false });
 
-        pokeApiQuery('pokemon?limit=999')
-            .then(async ({ data: { count, results } }) => {
-                const pokemonsList = await Promise.all(
-                    results.map(async (record) => {
-                        const { data } = await axios.get(record.url);
-                        return data;
-                    })
-                );
-
-                return { count, pokemonsList };
-            })
-            .then(({ count, pokemonsList }) => {
+        pokeApiQuery('pokemon?limit=999').then(
+            async ({ data: { count, results } }) => {
                 const pages = Math.ceil(count / 20.0);
-
                 this.setState({ pages });
-                this.setState({ pokemonsList });
-                this.setState({ maxPokemonId: count });
+
+                // Load first chunk of pokemons
+                await this.getNextPokemonsPortion(0, 20, results);
+                this.setState({ isReady: true });
+
+                this.getNextPokemonsPortion(20, count, results);
                 this.setState({ isLoading: false });
-            });
+            }
+        );
+    }
+
+    async getNextPokemonsPortion(from, maxId, results) {
+        const chunkSize = 10;
+        for (let i = from; i < maxId; i += chunkSize) {
+            const { pokemonsList } = this.state;
+
+            const promises = results
+                .slice(i, i + chunkSize)
+                .map(async (record) => {
+                    const { data } = await axios.get(record.url);
+                    return data;
+                });
+            const res = await Promise.all(promises);
+
+            this.setState({ pokemonsList: pokemonsList.concat(res) });
+            this.setState({ maxPokemonId: i + chunkSize });
+        }
     }
 
     setPage(num) {
@@ -80,7 +96,13 @@ class Home extends React.PureComponent {
     }
 
     render() {
-        const { pokemonId, pokemonsList, isLoading, page } = this.state;
+        const {
+            pokemonId,
+            pokemonsList,
+            isReady,
+            isFetching,
+            page,
+        } = this.state;
 
         return (
             <Pokedex
@@ -89,14 +111,16 @@ class Home extends React.PureComponent {
                         width="100%"
                         height="70%"
                         style={{ marginBottom: '30px' }}
-                        pokemonId={pokemonId}
+                        pokemon={pokemonsList[pokemonId - 1]}
+                        isReady={isReady}
                     />
                 }
                 rightSideComponent={
                     <PokemonsGrid
                         page={page}
-                        isLoading={isLoading}
-                        pokemonsList={pokemonsList}
+                        isReady={isReady}
+                        isFetching={isFetching}
+                        pokemonsList={pokemonsList.slice(0, 20)}
                         width="100%"
                         height="85%"
                         style={{ alignSelf: 'end' }}

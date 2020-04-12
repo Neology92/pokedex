@@ -6,15 +6,13 @@ import { Grid, Wrapper } from './styled';
 export default class PokemonList extends PureComponent {
     render() {
         // const { isLoading } = this.state;
-        const { page, pokemonsList, isLoading, ...props } = this.props;
+        const { page, pokemonsList, isReady, ...props } = this.props;
 
         return (
             <Wrapper {...props}>
-                {isLoading ? (
-                    <h1>Loading...</h1>
-                ) : (
+                {isReady ? (
                     <Grid>
-                        {pokemonsList.slice(0, 20).map((pokemon) => (
+                        {pokemonsList.map((pokemon) => (
                             <PokemonItem
                                 name={pokemon.name}
                                 sprite={pokemon.sprites.front_default}
@@ -22,6 +20,8 @@ export default class PokemonList extends PureComponent {
                             />
                         ))}
                     </Grid>
+                ) : (
+                    <h1>Loading...</h1>
                 )}
             </Wrapper>
         );
@@ -31,5 +31,5 @@ export default class PokemonList extends PureComponent {
 PokemonList.propTypes = {
     page: PropTypes.number.isRequired,
     pokemonsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-    isLoading: PropTypes.bool.isRequired,
+    isReady: PropTypes.bool.isRequired,
 };

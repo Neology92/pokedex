@@ -8,7 +8,6 @@ export default class PokemonItem extends PureComponent {
 
         return (
             <Wrapper>
-                {console.log(name)}
                 <Img src={sprite} alt={`${name} icon`} />
                 <Name>{name}</Name>
             </Wrapper>
