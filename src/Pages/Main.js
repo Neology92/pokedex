@@ -33,8 +33,6 @@ class Main extends React.PureComponent {
         this.getPokemons = this.getPokemons.bind(this);
         this.setPage = this.setPage.bind(this);
         this.setPokemonId = this.setPokemonId.bind(this);
-        this.nextPokemonId = this.nextPokemonId.bind(this);
-        this.prevPokemonId = this.prevPokemonId.bind(this);
         this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
         this.showMessage = this.showMessage.bind(this);
@@ -110,16 +108,6 @@ class Main extends React.PureComponent {
                 'left'
             );
         }
-    }
-
-    nextPokemonId() {
-        const { pokemonId } = this.state;
-        this.setPokemonId(pokemonId + 1);
-    }
-
-    prevPokemonId() {
-        const { pokemonId } = this.state;
-        this.setPokemonId(pokemonId - 1);
     }
 
     prevPokemon() {
@@ -207,8 +195,8 @@ class Main extends React.PureComponent {
                 }
                 random={this.random}
                 prevPokemon={this.prevPokemon}
-                prevPokemonId={this.prevPokemonId}
-                nextPokemonId={this.nextPokemonId}
+                prevPokemonId={() => this.setPokemonId(pokemonId - 1)}
+                nextPokemonId={() => this.setPokemonId(pokemonId + 1)}
             />
         );
     }
