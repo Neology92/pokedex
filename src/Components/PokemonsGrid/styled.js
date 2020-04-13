@@ -10,7 +10,7 @@ const Grid = styled.div`
 
     ${({ theme }) => theme.media.above.s} {
         grid-template-columns: repeat(4, 80px);
-        grid-template-rows: repeat(5, 80px);
+        grid-template-rows: repeat(5, 80px) 30px;
         grid-column-gap: 20px;
     }
 
@@ -31,7 +31,7 @@ const Grid = styled.div`
 const Wrapper = styled(Card)`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 `;
 

@@ -32,12 +32,12 @@ export default class PokemonsGrid extends PureComponent {
                                     key={pokemon.id}
                                 />
                             ))}
+                            <Pagination
+                                page={page}
+                                setPage={setPage}
+                                maxPage={maxPage}
+                            />
                         </Grid>
-                        <Pagination
-                            page={page}
-                            setPage={setPage}
-                            maxPage={maxPage}
-                        />
                         <Info showed={info.show}>{info.text}</Info>
                     </>
                 ) : (

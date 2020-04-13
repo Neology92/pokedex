@@ -30,8 +30,9 @@ export default class Pagination extends PureComponent {
     }
 
     setInputValue(value) {
-        const { maxPage } = this.props;
+        const { maxPage, page } = this.props;
         let val = Number(value);
+        if (Number.isNaN(val)) val = page;
         if (val > maxPage) val = maxPage;
 
         this.setState({
@@ -45,6 +46,13 @@ export default class Pagination extends PureComponent {
 
         return (
             <Wrapper>
+                <form action="" onSubmit={this.onSubmitPage}>
+                    <Input
+                        value={inputValue}
+                        onChange={(e) => this.setInputValue(e.target.value)}
+                    />
+                </form>
+                <Limit>/{maxPage}</Limit>
                 <Button
                     type="button"
                     onClick={() => {
@@ -53,13 +61,6 @@ export default class Pagination extends PureComponent {
                 >
                     {'<'}
                 </Button>
-                <form action="" onSubmit={this.onSubmitPage}>
-                    <Input
-                        value={inputValue}
-                        onChange={(e) => this.setInputValue(e.target.value)}
-                    />
-                </form>
-                <Limit>/{maxPage}</Limit>
                 <Button
                     type="button"
                     onClick={() => {
