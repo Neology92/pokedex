@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { animateScroll } from 'react-scroll';
 import PropTypes from 'prop-types';
 import PokemonItem from '../PokemonItem/PokemonItem';
 import Pagination from '../Pagination/Pagination';
@@ -6,8 +7,28 @@ import Info from '../Info/Info';
 import { Grid, Wrapper } from './styled';
 
 export default class PokemonsGrid extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            width: 360,
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ width: window.innerWidth });
+    }
+
+    handleClick(id) {
+        const { setPokemonId } = this.props;
+        const { width } = this.state;
+        setPokemonId(id);
+        if (width <= 1000) {
+            animateScroll.scrollTo(150);
+        }
+    }
+
     render() {
-        // const { isLoading } = this.state;
         const {
             page,
             maxPage,
@@ -26,7 +47,7 @@ export default class PokemonsGrid extends PureComponent {
                         <Grid>
                             {pokemonsList.map((pokemon) => (
                                 <PokemonItem
-                                    onClick={() => setPokemonId(pokemon.id)}
+                                    onClick={() => this.handleClick(pokemon.id)}
                                     name={pokemon.name}
                                     sprite={pokemon.sprites.front_default}
                                     key={pokemon.id}
