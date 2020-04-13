@@ -6,7 +6,7 @@ import { PokemonDetails, PokemonsGrid } from '../Components';
 
 import pokeApiQuery from '../Utils/pokeApiQuery';
 
-class Home extends React.PureComponent {
+class Main extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +18,16 @@ class Home extends React.PureComponent {
             isFetching: false,
             page: 1,
             maxPage: 1,
+            info: {
+                left: {
+                    show: false,
+                    text: '',
+                },
+                right: {
+                    show: false,
+                    text: '',
+                },
+            },
         };
 
         this.getPokemons = this.getPokemons.bind(this);
@@ -27,6 +37,7 @@ class Home extends React.PureComponent {
         this.prevPokemonId = this.prevPokemonId.bind(this);
         this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
+        this.showMessage = this.showMessage.bind(this);
     }
 
     async componentDidMount() {
@@ -78,6 +89,11 @@ class Home extends React.PureComponent {
             if (num >= 1 && num <= maxPage) {
                 this.setState({ page: num });
             }
+        } else {
+            this.showMessage(
+                'Not ready yet! This may take a few seconds...',
+                'right'
+            );
         }
     }
 
@@ -88,6 +104,8 @@ class Home extends React.PureComponent {
                 this.setState({ prevPokemon: pokemonId });
                 this.setState({ pokemonId: id });
             }
+        } else {
+            this.showMessage('Not ready yet! Wait a few seconds...', 'left');
         }
     }
 
@@ -107,14 +125,43 @@ class Home extends React.PureComponent {
     }
 
     random() {
-        const { pokemonId, maxPokemonId } = this.state;
-        let randomId = pokemonId;
+        const { pokemonId, maxPokemonId, isFetching } = this.state;
 
-        while (randomId === pokemonId) {
-            randomId = Math.round(Math.random() * (maxPokemonId - 1)) + 1;
+        if (!isFetching) {
+            let randomId = pokemonId;
+
+            while (randomId === pokemonId) {
+                randomId = Math.round(Math.random() * (maxPokemonId - 1)) + 1;
+            }
+
+            this.setPokemonId(randomId);
+        } else {
+            this.showMessage('Wait to load all pokemons...', 'left');
         }
+    }
 
-        this.setPokemonId(randomId);
+    showMessage(text, where) {
+        const { info } = this.state;
+        this.setState({
+            info: {
+                ...info,
+                [where]: {
+                    show: true,
+                    text,
+                },
+            },
+        });
+
+        setTimeout(() => {
+            this.setState({
+                info: {
+                    [where]: {
+                        show: false,
+                        text: '',
+                    },
+                },
+            });
+        }, 2000);
     }
 
     render() {
@@ -125,6 +172,7 @@ class Home extends React.PureComponent {
             isFetching,
             page,
             maxPage,
+            info,
         } = this.state;
 
         return (
@@ -134,6 +182,7 @@ class Home extends React.PureComponent {
                         style={{ marginBottom: '30px' }}
                         pokemon={pokemonsList[pokemonId - 1]}
                         isReady={isReady}
+                        info={info.left}
                     />
                 }
                 rightSideComponent={
@@ -141,11 +190,16 @@ class Home extends React.PureComponent {
                         setPokemonId={this.setPokemonId}
                         page={page}
                         maxPage={maxPage}
+                        setPage={this.setPage}
                         isReady={isReady}
                         isFetching={isFetching}
-                        pokemonsList={pokemonsList.slice(0, 20)}
+                        pokemonsList={pokemonsList.slice(
+                            (page - 1) * 20,
+                            page * 20
+                        )}
                         height="85%"
                         style={{ alignSelf: 'end' }}
+                        info={info.right}
                     />
                 }
                 random={this.random}
@@ -157,4 +211,4 @@ class Home extends React.PureComponent {
     }
 }
 
-export default Home;
+export default Main;

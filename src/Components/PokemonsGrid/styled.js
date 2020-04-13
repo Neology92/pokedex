@@ -30,7 +30,9 @@ const Grid = styled.div`
 
 const Wrapper = styled(Card)`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 export { Grid, Wrapper };

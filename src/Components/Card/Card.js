@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const Card = styled.section`
+    overflow: hidden;
+
     width: 100%;
     height: ${({ height }) => height || '100px'};
 
