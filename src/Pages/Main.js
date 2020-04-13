@@ -91,7 +91,7 @@ class Main extends React.PureComponent {
             }
         } else {
             this.showMessage(
-                'Not ready yet! This may take a few seconds...',
+                'Not ready yet! Please wait a few seconds...',
                 'right'
             );
         }
@@ -105,7 +105,10 @@ class Main extends React.PureComponent {
                 this.setState({ pokemonId: id });
             }
         } else {
-            this.showMessage('Not ready yet! Wait a few seconds...', 'left');
+            this.showMessage(
+                'Not ready yet! Please wait a few seconds...',
+                'left'
+            );
         }
     }
 

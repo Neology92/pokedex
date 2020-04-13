@@ -24,12 +24,14 @@ const Input = styled.input`
     background: none;
     padding: 2px 5px;
     margin: 0;
+    width: 15px;
 
     color: ${({ theme }) => theme.color.grey[4]};
 `;
-const Limit = styled.input`
-    padding: 2px 5px;
+const Limit = styled.span`
+    padding: 2px 5px 2px 0;
     margin: 0;
+    width: 15px;
 
     color: ${({ theme }) => theme.color.grey[1]};
 `;

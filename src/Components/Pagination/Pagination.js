@@ -4,27 +4,64 @@ import PropTypes from 'prop-types';
 import { Wrapper, Input, Button, Limit } from './styled';
 
 export default class Pagination extends PureComponent {
+    constructor(props) {
+        super(props);
+        const { page } = this.props;
+        this.state = {
+            inputValue: page,
+        };
+        this.setInputValue = this.setInputValue.bind(this);
+        this.onSubmitPage = this.onSubmitPage.bind(this);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { page } = this.props;
+        if (prevProps.page !== page) {
+            this.setInputValue(page);
+        }
+    }
+
+    onSubmitPage(e) {
+        const { inputValue } = this.state;
+        const { setPage } = this.props;
+
+        e.preventDefault();
+        setPage(inputValue);
+    }
+
+    setInputValue(value) {
+        const { maxPage } = this.props;
+        let val = Number(value);
+        if (val > maxPage) val = maxPage;
+
+        this.setState({
+            inputValue: val,
+        });
+    }
+
     render() {
         const { setPage, page, maxPage } = this.props;
+        const { inputValue } = this.state;
 
         return (
             <Wrapper>
                 <Button
+                    type="button"
                     onClick={() => {
                         setPage(page - 1);
                     }}
                 >
                     {'<'}
                 </Button>
-                {/* <Input
-                    onSubmit={(e) => {
-                        setPage(e.target.value);
-                    }}
-                >
-                    a
-                </Input> */}
-                {/* <Limit>/{maxPage}</Limit> */}
+                <form action="" onSubmit={this.onSubmitPage}>
+                    <Input
+                        value={inputValue}
+                        onChange={(e) => this.setInputValue(e.target.value)}
+                    />
+                </form>
+                <Limit>/{maxPage}</Limit>
                 <Button
+                    type="button"
                     onClick={() => {
                         setPage(page + 1);
                     }}
