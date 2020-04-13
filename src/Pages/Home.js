@@ -11,6 +11,7 @@ class Home extends React.PureComponent {
         super(props);
         this.state = {
             pokemonId: 1,
+            prevPokemon: 1,
             maxPokemonId: 1,
             pokemonsList: [],
             isReady: false,
@@ -24,6 +25,7 @@ class Home extends React.PureComponent {
         this.setPokemonId = this.setPokemonId.bind(this);
         this.nextPokemonId = this.nextPokemonId.bind(this);
         this.prevPokemonId = this.prevPokemonId.bind(this);
+        this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
     }
 
@@ -83,6 +85,7 @@ class Home extends React.PureComponent {
         const { pokemonId, maxPokemonId, isReady } = this.state;
         if (isReady) {
             if (id >= 1 && id <= maxPokemonId && id !== pokemonId) {
+                this.setState({ prevPokemon: pokemonId });
                 this.setState({ pokemonId: id });
             }
         }
@@ -96,6 +99,11 @@ class Home extends React.PureComponent {
     prevPokemonId() {
         const { pokemonId } = this.state;
         this.setPokemonId(pokemonId - 1);
+    }
+
+    prevPokemon() {
+        const { prevPokemon } = this.state;
+        this.setPokemonId(prevPokemon);
     }
 
     random() {
@@ -141,6 +149,7 @@ class Home extends React.PureComponent {
                     />
                 }
                 random={this.random}
+                prevPokemon={this.prevPokemon}
                 prevPokemonId={this.prevPokemonId}
                 nextPokemonId={this.nextPokemonId}
             />

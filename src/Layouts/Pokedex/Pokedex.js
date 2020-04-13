@@ -23,6 +23,7 @@ class Pokedex extends React.PureComponent {
             prevPokemonId,
             nextPokemonId,
             random,
+            prevPokemon,
         } = this.props;
 
         return (
@@ -35,7 +36,9 @@ class Pokedex extends React.PureComponent {
                             Random
                         </Button>
                         <Button color="#FB2EFF">Your Pokemons</Button>
-                        <Button color="#77DE82">Previous</Button>
+                        <Button color="#77DE82" onClick={prevPokemon}>
+                            Previous
+                        </Button>
                         <CrossButtons>
                             <ArrowButton direction="top" />
                             <ArrowButton
@@ -70,6 +73,7 @@ Pokedex.propTypes = {
     prevPokemonId: PropTypes.func.isRequired,
     nextPokemonId: PropTypes.func.isRequired,
     random: PropTypes.func.isRequired,
+    prevPokemon: PropTypes.func.isRequired,
 };
 
 export default Pokedex;
