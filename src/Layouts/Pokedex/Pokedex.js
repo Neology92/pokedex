@@ -22,6 +22,7 @@ class Pokedex extends React.PureComponent {
             rightSideComponent,
             prevPokemonId,
             nextPokemonId,
+            random,
         } = this.props;
 
         return (
@@ -30,7 +31,9 @@ class Pokedex extends React.PureComponent {
                     <>{leftSideComponent}</>
                     <GamepadButtonsGroup>
                         <Pokeball />
-                        <Button color="#DDCE43">Random</Button>
+                        <Button color="#DDCE43" onClick={random}>
+                            Random
+                        </Button>
                         <Button color="#FB2EFF">Your Pokemons</Button>
                         <Button color="#77DE82">Previous</Button>
                         <CrossButtons>
@@ -66,6 +69,7 @@ Pokedex.propTypes = {
     rightSideComponent: PropTypes.node.isRequired,
     prevPokemonId: PropTypes.func.isRequired,
     nextPokemonId: PropTypes.func.isRequired,
+    random: PropTypes.func.isRequired,
 };
 
 export default Pokedex;

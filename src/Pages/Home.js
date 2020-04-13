@@ -19,10 +19,12 @@ class Home extends React.PureComponent {
             maxPage: 1,
         };
 
+        this.getPokemons = this.getPokemons.bind(this);
+        this.setPage = this.setPage.bind(this);
         this.setPokemonId = this.setPokemonId.bind(this);
         this.nextPokemonId = this.nextPokemonId.bind(this);
         this.prevPokemonId = this.prevPokemonId.bind(this);
-        this.getPokemons = this.getPokemons.bind(this);
+        this.random = this.random.bind(this);
     }
 
     async componentDidMount() {
@@ -96,6 +98,17 @@ class Home extends React.PureComponent {
         this.setPokemonId(pokemonId - 1);
     }
 
+    random() {
+        const { pokemonId, maxPokemonId } = this.state;
+        let randomId = pokemonId;
+
+        while (randomId === pokemonId) {
+            randomId = Math.round(Math.random() * (maxPokemonId - 1)) + 1;
+        }
+
+        this.setPokemonId(randomId);
+    }
+
     render() {
         const {
             pokemonId,
@@ -127,6 +140,7 @@ class Home extends React.PureComponent {
                         style={{ alignSelf: 'end' }}
                     />
                 }
+                random={this.random}
                 prevPokemonId={this.prevPokemonId}
                 nextPokemonId={this.nextPokemonId}
             />
