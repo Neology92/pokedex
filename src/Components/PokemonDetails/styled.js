@@ -3,6 +3,7 @@ import Card from '../Card/Card';
 
 const StyledCard = styled(Card)`
     height: 560px;
+    margin-bottom: 30px;
 
     ${({ theme }) => theme.media.above.m} {
         height: 70%;
@@ -12,6 +13,7 @@ const StyledCard = styled(Card)`
 const Wrapper = styled.div`
     height: 100%;
     width: 100%;
+
     display: grid;
     grid-template-columns: 0.45fr 0.55fr;
     grid-template-rows: 20px 0.38fr 0.62fr;

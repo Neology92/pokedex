@@ -6,7 +6,7 @@ import Info from '../Info/Info';
 import { Wrapper, Name, StyledCard } from './styled';
 
 const asThreeDigit = (num) => {
-    return `00${num}`.substr(-3);
+    return `0000${num}`.substr(-5);
 };
 
 export default class PokemonDetails extends PureComponent {

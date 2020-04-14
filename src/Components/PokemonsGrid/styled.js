@@ -29,6 +29,8 @@ const Grid = styled.div`
 `;
 
 const Wrapper = styled(Card)`
+    height: 85%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;

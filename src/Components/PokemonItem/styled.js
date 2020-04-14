@@ -8,8 +8,9 @@ const Name = styled.div`
     width: 100%;
     height: 100%;
 
-    text-align: center;
-    line-height: 400%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     opacity: 0;
     background: ${({ theme }) => theme.color.black};
