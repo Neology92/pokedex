@@ -8,20 +8,28 @@ import Message from '../Message/Message';
 import Grid from '../Grid/Grid';
 import { Wrapper } from './styled';
 
-function displayModalContent(content) {
-    switch (content) {
-        case 'sort':
-            return <SortMenu />;
-        case 'filter':
-            return <FilterMenu />;
-        case 'saved':
-            return <SavedMenu />;
-        default:
-            return null;
-    }
-}
-
 export default class RightScreen extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.displayModalContent = this.displayModalContent.bind(this);
+    }
+
+    displayModalContent(content) {
+        const { sortPokemons } = this.props;
+
+        switch (content) {
+            case 'sort':
+                return <SortMenu sortPokemons={sortPokemons} />;
+            case 'filter':
+                return <FilterMenu />;
+            case 'saved':
+                return <SavedMenu />;
+            default:
+                return null;
+        }
+    }
+
     render() {
         const {
             isReady,
@@ -50,7 +58,7 @@ export default class RightScreen extends PureComponent {
                         />
                         <Message showed={message.show}>{message.text}</Message>
                         <Modal open={isModalOpen} closeModal={closeModal}>
-                            {displayModalContent(modalContent)}
+                            {this.displayModalContent(modalContent)}
                         </Modal>
                     </>
                 ) : (
@@ -78,6 +86,7 @@ RightScreen.propTypes = {
     isModalOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
     modalContent: PropTypes.string.isRequired,
+    sortPokemons: PropTypes.func.isRequired,
 };
 
 RightScreen.defaultProps = {

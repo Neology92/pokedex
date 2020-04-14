@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import InfoTable from '../InfoTable/InfoTable';
+import Table from '../Table/Table';
 import Picture from '../Picture/Picture';
 import Message from '../Message/Message';
 import { Wrapper, Name, StyledCard } from './styled';
@@ -9,6 +9,24 @@ import setSprite from '../../Utils/setSprite';
 const asThreeDigit = (num) => {
     return `0000${num}`.substr(-5);
 };
+
+const rows = [
+    'Type',
+    'Generation',
+    'Ability',
+    'Hidden Ab.',
+    'Habitat',
+    <span key="n">
+        Evolution
+        <br />
+        Next form
+    </span>,
+    <span key="p">
+        Evolution
+        <br />
+        Prev form
+    </span>,
+];
 
 export default class LeftScreen extends PureComponent {
     render() {
@@ -26,7 +44,17 @@ export default class LeftScreen extends PureComponent {
                             placeholder={setSprite(pokemon)}
                         />
 
-                        <InfoTable />
+                        <Table>
+                            <tbody>
+                                {rows.map((row) => (
+                                    <tr key={row}>
+                                        <th>{row}</th>
+                                        <td>a</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+
                         <Message showed={message.show}>{message.text}</Message>
                     </Wrapper>
                 ) : (
