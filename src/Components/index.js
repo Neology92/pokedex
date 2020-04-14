@@ -8,6 +8,7 @@ import ArrowButton from './ArrowButton/ArrowButton';
 import Pokeball from './Pokeball/Pokeball';
 import PokemonDetails from './PokemonDetails/PokemonDetails';
 import PokemonsGrid from './PokemonsGrid/PokemonsGrid';
+import Modal from './Modal/Modal';
 
 export {
     LeftWing,
@@ -20,4 +21,5 @@ export {
     Pokeball,
     PokemonDetails,
     PokemonsGrid,
+    Modal,
 };

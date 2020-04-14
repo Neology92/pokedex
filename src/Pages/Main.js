@@ -27,8 +27,11 @@ class Main extends React.PureComponent {
                     text: '',
                 },
             },
+            isModalOpen: false,
         };
 
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.getPokemonById = this.getPokemonById.bind(this);
         this.setPage = this.setPage.bind(this);
         this.setPokemonId = this.setPokemonId.bind(this);
@@ -167,10 +170,12 @@ class Main extends React.PureComponent {
     sortPokemons(indicator, direction) {
         const { pokemonsList, isFetching } = this.state;
 
+        const sortedList = [...pokemonsList];
+
         if (!isFetching) {
             switch (indicator) {
                 case 'name':
-                    pokemonsList.sort((a, b) => {
+                    sortedList.sort((a, b) => {
                         const nameA = a.name.toLowerCase();
                         const nameB = b.name.toLowerCase();
                         if (nameA < nameB) return -1;
@@ -180,7 +185,7 @@ class Main extends React.PureComponent {
                     break;
 
                 case 'id':
-                    pokemonsList.sort((a, b) => {
+                    sortedList.sort((a, b) => {
                         const idA = a.id;
                         const idB = b.id;
                         return idA - idB;
@@ -191,18 +196,32 @@ class Main extends React.PureComponent {
             }
 
             if (direction === 'reversed') {
-                pokemonsList.reverse();
+                sortedList.reverse();
             }
 
-            this.setState({
-                pokemonsList,
-            });
+            if (sortedList !== pokemonsList) {
+                this.setState({
+                    pokemonsList: sortedList,
+                });
+            }
         } else {
             this.showMessage(
                 'Not ready yet! Please wait a few seconds...',
                 'right'
             );
         }
+    }
+
+    showModal() {
+        this.setState({
+            isModalOpen: true,
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            isModalOpen: false,
+        });
     }
 
     render() {
@@ -214,6 +233,7 @@ class Main extends React.PureComponent {
             page,
             maxPage,
             info,
+            isModalOpen,
         } = this.state;
 
         return (
@@ -236,13 +256,16 @@ class Main extends React.PureComponent {
                             pokemonsList={pokemonsList}
                             setPage={this.setPage}
                             setPokemonId={this.setPokemonId}
+                            sortPokemons={this.sortPokemons}
+                            isModalOpen={isModalOpen}
+                            closeModal={this.closeModal}
                         />
                     }
+                    showModal={this.showModal}
                     nextPokemonId={() => this.setPokemonId(pokemonId + 1)}
                     prevPokemonId={() => this.setPokemonId(pokemonId - 1)}
                     prevPokemon={this.prevPokemon}
                     random={this.random}
-                    sortPokemons={this.sortPokemons}
                 />
             </>
         );

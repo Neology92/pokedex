@@ -24,7 +24,7 @@ class Pokedex extends React.PureComponent {
             prevPokemon,
             random,
             rightSideComponent,
-            sortPokemons,
+            showModal,
         } = this.props;
 
         return (
@@ -58,11 +58,10 @@ class Pokedex extends React.PureComponent {
                 <VerticalConnector />
                 <RightWing>
                     <FilterButtonsGroup>
-                        <Button color="#48CB4D">Filter</Button>
-                        <Button
-                            color="#FA9C45"
-                            onClick={() => sortPokemons('id', 'reversed')}
-                        >
+                        <Button color="#48CB4D" onClick={showModal}>
+                            Filter
+                        </Button>
+                        <Button color="#FA9C45" onClick={showModal}>
                             Sort
                         </Button>
                     </FilterButtonsGroup>
@@ -80,7 +79,7 @@ Pokedex.propTypes = {
     prevPokemon: PropTypes.func.isRequired,
     random: PropTypes.func.isRequired,
     rightSideComponent: PropTypes.node.isRequired,
-    sortPokemons: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired,
 };
 
 export default Pokedex;

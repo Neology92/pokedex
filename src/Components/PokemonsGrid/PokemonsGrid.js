@@ -3,6 +3,7 @@ import { animateScroll } from 'react-scroll';
 import PropTypes from 'prop-types';
 import PokemonItem from '../PokemonItem/PokemonItem';
 import Pagination from '../Pagination/Pagination';
+import Modal from '../Modal/Modal';
 import Info from '../Info/Info';
 import { Grid, Wrapper } from './styled';
 import setSprite from '../../Utils/setSprite';
@@ -13,6 +14,7 @@ export default class PokemonsGrid extends PureComponent {
         this.state = {
             width: 360,
         };
+
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -38,6 +40,8 @@ export default class PokemonsGrid extends PureComponent {
             pokemonsList,
             setPage,
             setPokemonId,
+            isModalOpen,
+            closeModal,
             ...props
         } = this.props;
 
@@ -54,7 +58,6 @@ export default class PokemonsGrid extends PureComponent {
                                             this.handleClick(pokemon.id)
                                         }
                                         name={pokemon.name}
-                                        // sprite={pokemon.sprites.front_default}
                                         sprite={setSprite(pokemon)}
                                         key={pokemon.id}
                                     />
@@ -66,6 +69,9 @@ export default class PokemonsGrid extends PureComponent {
                             />
                         </Grid>
                         <Info showed={info.show}>{info.text}</Info>
+                        <Modal open={isModalOpen} closeModal={closeModal}>
+                            lel
+                        </Modal>
                     </>
                 ) : (
                     <>
@@ -89,6 +95,8 @@ PokemonsGrid.propTypes = {
         show: PropTypes.bool,
         text: PropTypes.string,
     }),
+    isModalOpen: PropTypes.bool.isRequired,
+    closeModal: PropTypes.func.isRequired,
 };
 
 PokemonsGrid.defaultProps = {
