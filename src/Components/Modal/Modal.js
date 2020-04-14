@@ -6,8 +6,6 @@ export default class Modal extends PureComponent {
     render() {
         const { children, open, closeModal } = this.props;
 
-        // onClick={() => sortPokemons('name', 'reversed')}
-
         return (
             <Wrapper open={open}>
                 <Background onClick={closeModal} />

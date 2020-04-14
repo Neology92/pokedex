@@ -28,10 +28,12 @@ class Main extends React.PureComponent {
                 },
             },
             isModalOpen: false,
+            modalContent: 'sort',
         };
 
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.setModalContent = this.setModalContent.bind(this);
         this.getPokemonById = this.getPokemonById.bind(this);
         this.setPage = this.setPage.bind(this);
         this.setPokemonId = this.setPokemonId.bind(this);
@@ -79,6 +81,12 @@ class Main extends React.PureComponent {
                 'left'
             );
         }
+    }
+
+    setModalContent(content) {
+        this.setState({
+            modalContent: content,
+        });
     }
 
     async fetchPokemons() {
@@ -234,6 +242,7 @@ class Main extends React.PureComponent {
             maxPage,
             info,
             isModalOpen,
+            modalContent,
         } = this.state;
 
         return (
@@ -259,8 +268,10 @@ class Main extends React.PureComponent {
                             sortPokemons={this.sortPokemons}
                             isModalOpen={isModalOpen}
                             closeModal={this.closeModal}
+                            modalContent={modalContent}
                         />
                     }
+                    setModalContent={this.setModalContent}
                     showModal={this.showModal}
                     nextPokemonId={() => this.setPokemonId(pokemonId + 1)}
                     prevPokemonId={() => this.setPokemonId(pokemonId - 1)}

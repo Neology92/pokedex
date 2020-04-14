@@ -11,7 +11,12 @@ const Wrapper = styled.div`
     left: 0;
     z-index: 6;
 
-    display: ${({ open }) => (open ? 'flex' : 'none')};
+    transition: opacity 0.1s ease-in-out;
+
+    opacity: ${({ open }) => (open ? 1 : 0)};
+    pointer-events: ${({ open }) => (open ? 'inherit' : 'none')};
+
+    display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 `;

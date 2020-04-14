@@ -25,6 +25,7 @@ class Pokedex extends React.PureComponent {
             random,
             rightSideComponent,
             showModal,
+            setModalContent,
         } = this.props;
 
         return (
@@ -36,7 +37,15 @@ class Pokedex extends React.PureComponent {
                         <Button color="#DDCE43" onClick={random}>
                             Random
                         </Button>
-                        <Button color="#FB2EFF">Your Pokemons</Button>
+                        <Button
+                            color="#FB2EFF"
+                            onClick={() => {
+                                setModalContent('saved');
+                                showModal();
+                            }}
+                        >
+                            Your Pokemons
+                        </Button>
                         <Button color="#77DE82" onClick={prevPokemon}>
                             Previous
                         </Button>
@@ -58,10 +67,22 @@ class Pokedex extends React.PureComponent {
                 <VerticalConnector />
                 <RightWing>
                     <FilterButtonsGroup>
-                        <Button color="#48CB4D" onClick={showModal}>
+                        <Button
+                            color="#48CB4D"
+                            onClick={() => {
+                                setModalContent('filter');
+                                showModal();
+                            }}
+                        >
                             Filter
                         </Button>
-                        <Button color="#FA9C45" onClick={showModal}>
+                        <Button
+                            color="#FA9C45"
+                            onClick={() => {
+                                setModalContent('sort');
+                                showModal();
+                            }}
+                        >
                             Sort
                         </Button>
                     </FilterButtonsGroup>
@@ -80,6 +101,7 @@ Pokedex.propTypes = {
     random: PropTypes.func.isRequired,
     rightSideComponent: PropTypes.node.isRequired,
     showModal: PropTypes.func.isRequired,
+    setModalContent: PropTypes.func.isRequired,
 };
 
 export default Pokedex;
