@@ -1,26 +1,11 @@
 import React, { PureComponent } from 'react';
 import { animateScroll } from 'react-scroll';
 import PropTypes from 'prop-types';
-import spritePlaceholder from '../../Assets/Images/pokemonSpritePlaceholder.jpg';
 import PokemonItem from '../PokemonItem/PokemonItem';
 import Pagination from '../Pagination/Pagination';
 import Info from '../Info/Info';
 import { Grid, Wrapper } from './styled';
-
-function setSprite(pokemon) {
-    const { sprites } = pokemon;
-
-    if (sprites.front_default) return sprites.front_default;
-    if (sprites.front_female) return sprites.front_female;
-    if (sprites.back_default) return sprites.back_default;
-    if (sprites.back_female) return sprites.back_female;
-    if (sprites.front_shiny) return sprites.front_shiny;
-    if (sprites.back_shiny) return sprites.back_shiny;
-    if (sprites.front_shiny_female) return sprites.front_shiny_female;
-    if (sprites.back_shiny_female) return sprites.back_shiny_female;
-
-    return spritePlaceholder;
-}
+import setSprite from '../../Utils/setSprite';
 
 export default class PokemonsGrid extends PureComponent {
     constructor(props) {

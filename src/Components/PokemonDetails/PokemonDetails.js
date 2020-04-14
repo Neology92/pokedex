@@ -4,6 +4,7 @@ import InfoTable from '../InfoTable/InfoTable';
 import Picture from '../Picture/Picture';
 import Info from '../Info/Info';
 import { Wrapper, Name, StyledCard } from './styled';
+import setSprite from '../../Utils/setSprite';
 
 const asThreeDigit = (num) => {
     return `0000${num}`.substr(-5);
@@ -22,7 +23,7 @@ export default class PokemonDetails extends PureComponent {
                         <Picture
                             src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
                             name={pokemon.name}
-                            placeholder={pokemon.sprites.front_default}
+                            placeholder={setSprite(pokemon)}
                         />
 
                         <InfoTable />
