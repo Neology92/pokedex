@@ -28,7 +28,7 @@ class Pokedex extends React.PureComponent {
                 },
             },
             isModalOpen: true,
-            modalContent: 'sort',
+            modalContent: 'filter',
         };
 
         this.showModal = this.showModal.bind(this);
