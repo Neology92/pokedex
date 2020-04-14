@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import InfoTable from '../InfoTable/InfoTable';
 import Picture from '../Picture/Picture';
-import Info from '../Info/Info';
+import Message from '../Message/Message';
 import { Wrapper, Name, StyledCard } from './styled';
 import setSprite from '../../Utils/setSprite';
 
@@ -10,9 +10,9 @@ const asThreeDigit = (num) => {
     return `0000${num}`.substr(-5);
 };
 
-export default class PokemonDetails extends PureComponent {
+export default class LeftScreen extends PureComponent {
     render() {
-        const { pokemon, isReady, info, ...props } = this.props;
+        const { pokemon, isReady, message, ...props } = this.props;
 
         return (
             <StyledCard {...props}>
@@ -27,12 +27,12 @@ export default class PokemonDetails extends PureComponent {
                         />
 
                         <InfoTable />
-                        <Info showed={info.show}>{info.text}</Info>
+                        <Message showed={message.show}>{message.text}</Message>
                     </Wrapper>
                 ) : (
                     <>
                         <h1>Loading...</h1>
-                        <Info showed={info.show}>{info.text}</Info>
+                        <Message showed={message.show}>{message.text}</Message>
                     </>
                 )}
             </StyledCard>
@@ -40,7 +40,7 @@ export default class PokemonDetails extends PureComponent {
     }
 }
 
-PokemonDetails.propTypes = {
+LeftScreen.propTypes = {
     pokemon: PropTypes.shape({
         name: PropTypes.string,
         id: PropTypes.number,
@@ -49,7 +49,7 @@ PokemonDetails.propTypes = {
         }),
     }),
 
-    info: PropTypes.shape({
+    message: PropTypes.shape({
         show: PropTypes.bool,
         text: PropTypes.string,
     }),
@@ -57,7 +57,7 @@ PokemonDetails.propTypes = {
     isReady: PropTypes.bool.isRequired,
 };
 
-PokemonDetails.defaultProps = {
+LeftScreen.defaultProps = {
     pokemon: { name: '', id: 0 },
-    info: { show: false, text: '' },
+    message: { show: false, text: '' },
 };

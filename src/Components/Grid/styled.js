@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import Card from '../Card/Card';
 
-const Grid = styled.div`
+const Arrangement = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: repeat(7, 80px);
@@ -28,13 +27,4 @@ const Grid = styled.div`
     }
 `;
 
-const Wrapper = styled(Card)`
-    height: 85%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-export { Grid, Wrapper };
+export { Arrangement };

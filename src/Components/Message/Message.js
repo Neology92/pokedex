@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper } from './styled';
 
-export default class Info extends PureComponent {
+export default class Message extends PureComponent {
     render() {
         const { children, showed } = this.props;
 
@@ -10,7 +10,7 @@ export default class Info extends PureComponent {
     }
 }
 
-Info.propTypes = {
+Message.propTypes = {
     children: PropTypes.node.isRequired,
     showed: PropTypes.bool.isRequired,
 };

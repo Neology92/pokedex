@@ -1,12 +1,12 @@
 /* eslint no-await-in-loop: 0 */
 import React from 'react';
 import axios from 'axios';
-import Pokedex from '../Layouts/Pokedex/Pokedex';
-import { PokemonDetails, PokemonsGrid } from '../Components';
+import Navigation from '../Layouts/Navigation/Navigation';
+import { LeftScreen, RightScreen } from '../Components';
 
 import pokeApiQuery from '../Utils/pokeApiQuery';
 
-class Main extends React.PureComponent {
+class Pokedex extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ class Main extends React.PureComponent {
             isFetching: false,
             page: 1,
             maxPage: 1,
-            info: {
+            message: {
                 left: {
                     show: false,
                     text: '',
@@ -152,10 +152,8 @@ class Main extends React.PureComponent {
     }
 
     showMessage(text, where) {
-        const { info } = this.state;
         this.setState({
-            info: {
-                ...info,
+            message: {
                 [where]: {
                     show: true,
                     text,
@@ -165,7 +163,7 @@ class Main extends React.PureComponent {
 
         setTimeout(() => {
             this.setState({
-                info: {
+                message: {
                     [where]: {
                         show: false,
                         text: '',
@@ -240,26 +238,26 @@ class Main extends React.PureComponent {
             isFetching,
             page,
             maxPage,
-            info,
+            message,
             isModalOpen,
             modalContent,
         } = this.state;
 
         return (
             <>
-                <Pokedex
+                <Navigation
                     leftSideComponent={
-                        <PokemonDetails
+                        <LeftScreen
                             pokemon={this.getPokemonById(pokemonId)}
                             isReady={isReady}
-                            info={info.left}
+                            message={message.left}
                         />
                     }
                     rightSideComponent={
-                        <PokemonsGrid
+                        <RightScreen
                             isReady={isReady}
                             isFetching={isFetching}
-                            info={info.right}
+                            message={message.right}
                             maxPage={maxPage}
                             page={page}
                             pokemonsList={pokemonsList}
@@ -283,4 +281,4 @@ class Main extends React.PureComponent {
     }
 }
 
-export default Main;
+export default Pokedex;

@@ -15,7 +15,7 @@ import {
     GamepadButtonsGroup,
 } from './styled';
 
-class Pokedex extends React.PureComponent {
+class Navigation extends React.PureComponent {
     render() {
         const {
             leftSideComponent,
@@ -93,7 +93,7 @@ class Pokedex extends React.PureComponent {
     }
 }
 
-Pokedex.propTypes = {
+Navigation.propTypes = {
     leftSideComponent: PropTypes.node.isRequired,
     nextPokemonId: PropTypes.func.isRequired,
     prevPokemonId: PropTypes.func.isRequired,
@@ -104,4 +104,4 @@ Pokedex.propTypes = {
     setModalContent: PropTypes.func.isRequired,
 };
 
-export default Pokedex;
+export default Navigation;

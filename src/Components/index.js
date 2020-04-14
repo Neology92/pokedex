@@ -6,8 +6,8 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import ArrowButton from './ArrowButton/ArrowButton';
 import Pokeball from './Pokeball/Pokeball';
-import PokemonDetails from './PokemonDetails/PokemonDetails';
-import PokemonsGrid from './PokemonsGrid/PokemonsGrid';
+import LeftScreen from './LeftScreen/LeftScreen';
+import RightScreen from './RightScreen/RightScreen';
 import Modal from './Modal/Modal';
 
 export {
@@ -19,7 +19,7 @@ export {
     Card,
     ArrowButton,
     Pokeball,
-    PokemonDetails,
-    PokemonsGrid,
+    LeftScreen,
+    RightScreen,
     Modal,
 };
