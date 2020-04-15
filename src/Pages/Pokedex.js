@@ -13,8 +13,8 @@ class Pokedex extends React.PureComponent {
             pokemonId: 1,
             prevPokemon: 1,
             pokemonsList: [],
-            isReady: false,
-            isFetching: false,
+            speciesList: [],
+            loadingProgress: [false, false, false],
             page: 1,
             maxPage: 1,
             message: {
@@ -27,7 +27,7 @@ class Pokedex extends React.PureComponent {
                     text: '',
                 },
             },
-            isModalOpen: true,
+            isModalOpen: false,
             modalContent: 'filter',
         };
 
@@ -38,6 +38,7 @@ class Pokedex extends React.PureComponent {
         this.setPage = this.setPage.bind(this);
         this.setPokemonId = this.setPokemonId.bind(this);
         this.fetchPokemons = this.fetchPokemons.bind(this);
+        this.fetchSpecies = this.fetchSpecies.bind(this);
         this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
         this.showMessage = this.showMessage.bind(this);
@@ -46,6 +47,7 @@ class Pokedex extends React.PureComponent {
 
     componentDidMount() {
         this.fetchPokemons();
+        this.fetchSpecies();
     }
 
     getPokemonById(pokemonId) {
@@ -55,8 +57,8 @@ class Pokedex extends React.PureComponent {
     }
 
     setPage(num) {
-        const { maxPage, isFetching } = this.state;
-        if (!isFetching) {
+        const { maxPage, loadingProgress } = this.state;
+        if (loadingProgress[0] && loadingProgress[1]) {
             if (num >= 1 && num <= maxPage) {
                 this.setState({ page: num });
             }
@@ -69,8 +71,8 @@ class Pokedex extends React.PureComponent {
     }
 
     setPokemonId(newId) {
-        const { pokemonId, isReady } = this.state;
-        if (isReady) {
+        const { pokemonId, loadingProgress } = this.state;
+        if (loadingProgress[0]) {
             if (this.getPokemonById(newId)) {
                 this.setState({ prevPokemon: pokemonId });
                 this.setState({ pokemonId: newId });
@@ -90,9 +92,6 @@ class Pokedex extends React.PureComponent {
     }
 
     async fetchPokemons() {
-        this.setState({ isFetching: true });
-        this.setState({ isReady: false });
-
         const {
             data: { count, results },
         } = await pokeApiQuery('pokemon?limit=999');
@@ -116,15 +115,47 @@ class Pokedex extends React.PureComponent {
 
             // Wait for results
             const res = await Promise.all(promises);
-
             this.setState({ pokemonsList: pokemonsList.concat(res) });
 
             // After first iteration allow to load first pokemons
             if (i === 0) {
-                this.setState({ isReady: true });
+                const { loadingProgress } = this.state;
+                loadingProgress[0] = true;
+                this.setState({ loadingProgress });
             }
         }
-        this.setState({ isFetching: false });
+
+        const { loadingProgress } = this.state;
+        loadingProgress[1] = true;
+        this.setState({ loadingProgress });
+    }
+
+    async fetchSpecies() {
+        const {
+            data: { count, results },
+        } = await pokeApiQuery('pokemon-species?limit=999');
+
+        // Split species to smaller chunks before fetch
+        const chunkSize = 20;
+        for (let i = 0; i < count; i += chunkSize) {
+            const { speciesList } = this.state;
+
+            // Get promises of returning pokemons
+            const promises = results
+                .slice(i, i + chunkSize)
+                .map(async (record) => {
+                    const { data } = await axios.get(record.url);
+                    return data;
+                });
+
+            // Wait for results
+            const res = await Promise.all(promises);
+            this.setState({ speciesList: speciesList.concat(res) });
+        }
+
+        const { loadingProgress } = this.state;
+        loadingProgress[2] = true;
+        this.setState({ loadingProgress });
     }
 
     prevPokemon() {
@@ -133,9 +164,9 @@ class Pokedex extends React.PureComponent {
     }
 
     random() {
-        const { pokemonId, pokemonsList, isFetching } = this.state;
+        const { pokemonId, pokemonsList, loadingProgress } = this.state;
 
-        if (!isFetching) {
+        if (loadingProgress[0] && loadingProgress[1]) {
             const maxId = pokemonsList.slice(-1)[0].id;
             let randomId = pokemonId;
             let exists = true;
@@ -174,11 +205,11 @@ class Pokedex extends React.PureComponent {
     }
 
     sortPokemons(indicator, direction) {
-        const { pokemonsList, isFetching } = this.state;
+        const { pokemonsList, loadingProgress } = this.state;
 
         const sortedList = [...pokemonsList];
 
-        if (!isFetching) {
+        if (loadingProgress[0] && loadingProgress[1]) {
             switch (indicator) {
                 case 'name':
                     sortedList.sort((a, b) => {
@@ -234,8 +265,7 @@ class Pokedex extends React.PureComponent {
         const {
             pokemonId,
             pokemonsList,
-            isReady,
-            isFetching,
+            loadingProgress,
             page,
             maxPage,
             message,
@@ -249,14 +279,13 @@ class Pokedex extends React.PureComponent {
                     leftSideComponent={
                         <LeftScreen
                             pokemon={this.getPokemonById(pokemonId)}
-                            isReady={isReady}
+                            isReady={loadingProgress[0]}
                             message={message.left}
                         />
                     }
                     rightSideComponent={
                         <RightScreen
-                            isReady={isReady}
-                            isFetching={isFetching}
+                            isReady={loadingProgress[0]}
                             message={message.right}
                             maxPage={maxPage}
                             page={page}
