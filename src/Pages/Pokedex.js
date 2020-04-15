@@ -96,7 +96,7 @@ class Pokedex extends React.PureComponent {
     async fetchPokemons() {
         const {
             data: { count, results },
-        } = await pokeApiQuery('pokemon?limit=999');
+        } = await pokeApiQuery('pokemon?limit=807');
 
         const pokemonsPerPage = 20;
         const maxPage = Math.ceil(count / pokemonsPerPage);
@@ -160,8 +160,10 @@ class Pokedex extends React.PureComponent {
         }
 
         const { loadingProgress } = this.state;
-        loadingProgress[2] = true;
-        this.setState({ loadingProgress });
+        // Create new array to avoid (just) mutating
+        const newLoadingProgress = [...loadingProgress];
+        newLoadingProgress[2] = true;
+        this.setState({ loadingProgress: newLoadingProgress });
     }
 
     prevPokemon() {
@@ -360,6 +362,7 @@ class Pokedex extends React.PureComponent {
         const {
             pokemonId,
             pokemonsDisplayList,
+            speciesList,
             loadingProgress,
             page,
             maxPage,
@@ -374,7 +377,8 @@ class Pokedex extends React.PureComponent {
                     leftSideComponent={
                         <LeftScreen
                             pokemon={this.getPokemonById(pokemonId)}
-                            isReady={loadingProgress[0]}
+                            speciesList={speciesList}
+                            loadingProgress={loadingProgress}
                             message={message.left}
                         />
                     }

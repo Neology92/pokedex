@@ -17,6 +17,20 @@ const Table = styled.table`
             padding: 6px 0;
             width: 50%;
         }
+        th {
+            padding: 6px 100px 6px 0;
+        }
+
+        ${({ theme }) => theme.media.above.s} {
+            th {
+                padding: 6px 0px;
+            }
+        }
+        ${({ theme }) => theme.media.above.m} {
+            th {
+                padding: 6px 50px 6px 0;
+            }
+        }
     }
 `;
 
