@@ -9,7 +9,7 @@ import { Wrapper, Name, StyledCard } from './styled';
 import setSprite from '../../Utils/setSprite';
 
 const asThreeDigit = (num) => {
-    return `0000${num}`.substr(-5);
+    return `00${num}`.substr(-3);
 };
 
 export default class LeftScreen extends PureComponent {

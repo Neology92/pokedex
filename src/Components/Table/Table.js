@@ -28,7 +28,7 @@ const Table = styled.table`
         }
         ${({ theme }) => theme.media.above.m} {
             th {
-                padding: 6px 50px 6px 0;
+                padding: 6px 40px 6px 0;
             }
         }
     }
