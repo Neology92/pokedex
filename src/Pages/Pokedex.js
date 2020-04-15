@@ -13,6 +13,7 @@ class Pokedex extends React.PureComponent {
             pokemonId: 1,
             prevPokemon: 1,
             pokemonsList: [],
+            pokemonsDisplayList: [],
             speciesList: [],
             loadingProgress: [false, false, false],
             page: 1,
@@ -39,6 +40,7 @@ class Pokedex extends React.PureComponent {
         this.setPokemonId = this.setPokemonId.bind(this);
         this.fetchPokemons = this.fetchPokemons.bind(this);
         this.fetchSpecies = this.fetchSpecies.bind(this);
+        this.filterPokemons = this.filterPokemons.bind(this);
         this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
         this.showMessage = this.showMessage.bind(this);
@@ -115,7 +117,11 @@ class Pokedex extends React.PureComponent {
 
             // Wait for results
             const res = await Promise.all(promises);
-            this.setState({ pokemonsList: pokemonsList.concat(res) });
+            const newPokemonsList = pokemonsList.concat(res);
+            this.setState({
+                pokemonsList: newPokemonsList,
+                pokemonsDisplayList: newPokemonsList,
+            });
 
             // After first iteration allow to load first pokemons
             if (i === 0) {
@@ -205,9 +211,9 @@ class Pokedex extends React.PureComponent {
     }
 
     sortPokemons(indicator, direction) {
-        const { pokemonsList, loadingProgress } = this.state;
+        const { pokemonsDisplayList, loadingProgress } = this.state;
 
-        const sortedList = [...pokemonsList];
+        const sortedList = [...pokemonsDisplayList];
 
         if (loadingProgress[0] && loadingProgress[1]) {
             switch (indicator) {
@@ -236,9 +242,98 @@ class Pokedex extends React.PureComponent {
                 sortedList.reverse();
             }
 
-            if (sortedList !== pokemonsList) {
+            if (sortedList !== pokemonsDisplayList) {
                 this.setState({
-                    pokemonsList: sortedList,
+                    pokemonsDisplayList: sortedList,
+                });
+            }
+        } else {
+            this.showMessage(
+                'Not ready yet! Please wait a few seconds...',
+                'right'
+            );
+        }
+    }
+
+    filterPokemons(conditions) {
+        const { pokemonsList, speciesList, loadingProgress } = this.state;
+
+        let filteredList = [...pokemonsList];
+
+        if (loadingProgress[0] && loadingProgress[1] && loadingProgress[2]) {
+            conditions.forEach(({ field, value }) => {
+                switch (field) {
+                    case 'type':
+                        filteredList = filteredList.filter(({ types }) => {
+                            const consistent = types.filter(
+                                ({ type }) => type.name === value
+                            );
+                            return consistent.length;
+                        });
+                        break;
+                    case 'pokemon-habitat':
+                        filteredList = filteredList.filter(({ species }) => {
+                            const pokemonHabitat = speciesList.find(
+                                (obj) => obj.name === species.name
+                            ).habitat;
+
+                            if (pokemonHabitat === null) {
+                                return false;
+                            }
+
+                            return pokemonHabitat.name === value;
+                        });
+                        break;
+                    case 'ability':
+                        filteredList = filteredList.filter(({ abilities }) => {
+                            const consistent = abilities.filter(
+                                ({ ability }) => ability.name === value
+                            );
+                            return consistent.length;
+                        });
+                        break;
+                    case 'pokemon-shape':
+                        filteredList = filteredList.filter(({ species }) => {
+                            const pokemonShape = speciesList.find(
+                                (obj) => obj.name === species.name
+                            ).shape;
+
+                            if (pokemonShape === null) {
+                                return false;
+                            }
+
+                            return pokemonShape.name === value;
+                        });
+                        break;
+                    case 'generation':
+                        filteredList = filteredList.filter(({ species }) => {
+                            const pokemonGeneration = speciesList.find(
+                                (obj) => obj.name === species.name
+                            ).generation;
+
+                            if (pokemonGeneration === null) {
+                                return false;
+                            }
+
+                            return pokemonGeneration.name === value;
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            if (filteredList !== pokemonsList) {
+                const pokemonsPerPage = 20;
+                const maxPage = Math.ceil(
+                    filteredList.length / pokemonsPerPage
+                );
+                const page = 1;
+
+                this.setState({
+                    pokemonsDisplayList: filteredList,
+                    page,
+                    maxPage,
                 });
             }
         } else {
@@ -264,7 +359,7 @@ class Pokedex extends React.PureComponent {
     render() {
         const {
             pokemonId,
-            pokemonsList,
+            pokemonsDisplayList,
             loadingProgress,
             page,
             maxPage,
@@ -289,21 +384,22 @@ class Pokedex extends React.PureComponent {
                             message={message.right}
                             maxPage={maxPage}
                             page={page}
-                            pokemonsList={pokemonsList}
+                            pokemonsList={pokemonsDisplayList}
                             setPage={this.setPage}
                             setPokemonId={this.setPokemonId}
                             sortPokemons={this.sortPokemons}
+                            filterPokemons={this.filterPokemons}
                             isModalOpen={isModalOpen}
                             closeModal={this.closeModal}
                             modalContent={modalContent}
                         />
                     }
-                    setModalContent={this.setModalContent}
-                    showModal={this.showModal}
                     nextPokemonId={() => this.setPokemonId(pokemonId + 1)}
                     prevPokemonId={() => this.setPokemonId(pokemonId - 1)}
                     prevPokemon={this.prevPokemon}
                     random={this.random}
+                    setModalContent={this.setModalContent}
+                    showModal={this.showModal}
                 />
             </>
         );

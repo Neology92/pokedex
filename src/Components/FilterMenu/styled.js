@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Table from '../Table/Table';
 
 const StyledTable = styled(Table)`
-    width: 200px;
+    width: 270px;
 `;
 
 export { StyledTable };

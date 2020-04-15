@@ -16,18 +16,35 @@ export default class RightScreen extends PureComponent {
     }
 
     displayModalContent(content) {
-        const { sortPokemons } = this.props;
+        const { filterPokemons, sortPokemons } = this.props;
 
-        switch (content) {
-            case 'sort':
-                return <SortMenu sortPokemons={sortPokemons} />;
-            case 'filter':
-                return <FilterMenu />;
-            case 'saved':
-                return <SavedMenu />;
-            default:
-                return null;
-        }
+        return (
+            <>
+                <div
+                    style={{
+                        display: `${content === 'sort' ? 'inherit' : 'none'}`,
+                    }}
+                >
+                    <SortMenu sortPokemons={sortPokemons} />
+                </div>
+
+                <div
+                    style={{
+                        display: `${content === 'filter' ? 'inherit' : 'none'}`,
+                    }}
+                >
+                    <FilterMenu filterPokemons={filterPokemons} />
+                </div>
+
+                <div
+                    style={{
+                        display: `${content === 'saved' ? 'inherit' : 'none'}`,
+                    }}
+                >
+                    <SavedMenu />
+                </div>
+            </>
+        );
     }
 
     render() {
@@ -73,6 +90,7 @@ export default class RightScreen extends PureComponent {
 }
 
 RightScreen.propTypes = {
+    filterPokemons: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     maxPage: PropTypes.number.isRequired,
     setPage: PropTypes.func.isRequired,

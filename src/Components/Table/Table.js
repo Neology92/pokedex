@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Table = styled.table`
     border-collapse: collapse;
+    text-transform: capitalize;
     text-align: left;
     color: ${({ theme }) => theme.color.grey[3]};
 

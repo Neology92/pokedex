@@ -4,7 +4,7 @@ const Select = styled.select`
     background: none;
     border: none;
     cursor: pointer;
-    min-width: 100px;
+    min-width: 140px;
     text-transform: capitalize;
     color: ${({ theme }) => theme.color.grey[3]};
 `;
