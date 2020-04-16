@@ -51,8 +51,10 @@ const Name = styled.h2`
 `;
 
 const StyledTable = styled(Table)`
-    tr th {
-        padding: 6px 100px 6px 0;
+    ${({ theme }) => theme.media.below.s} {
+        tr th {
+            padding: 6px 50px 6px 0;
+        }
     }
 `;
 

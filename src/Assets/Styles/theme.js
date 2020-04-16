@@ -19,6 +19,13 @@ const theme = {
             s: '@media (min-width: 480px)',
             xs: '@media (min-width: 360px)',
         },
+        below: {
+            xl: '@media (max-width: 1700px)',
+            l: '@media (max-width: 1330px)',
+            m: '@media (max-width: 1000px)',
+            s: '@media (max-width: 480px)',
+            xs: '@media (max-width: 360px)',
+        },
     },
 };
 

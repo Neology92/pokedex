@@ -17,16 +17,15 @@ const Table = styled.table`
             padding: 6px 0;
             width: 50%;
         }
-
-        ${({ theme }) => theme.media.above.s} {
-            th {
-                padding: 6px 0px;
-            }
+    }
+    ${({ theme }) => theme.media.above.s} {
+        tr th {
+            padding: 6px 0px;
         }
-        ${({ theme }) => theme.media.above.m} {
-            th {
-                padding: 6px 40px 6px 0;
-            }
+    }
+    ${({ theme }) => theme.media.above.m} {
+        tr th {
+            padding: 6px 40px 6px 0;
         }
     }
 `;
