@@ -15,6 +15,7 @@ class Pokedex extends React.PureComponent {
             pokemonsList: [],
             pokemonsDisplayList: [],
             speciesList: [],
+            savedList: [],
             loadingProgress: [false, false, false],
             page: 1,
             maxPage: 1,
@@ -43,6 +44,7 @@ class Pokedex extends React.PureComponent {
         this.filterPokemons = this.filterPokemons.bind(this);
         this.prevPokemon = this.prevPokemon.bind(this);
         this.random = this.random.bind(this);
+        this.saveCurrentPokemon = this.saveCurrentPokemon.bind(this);
         this.showMessage = this.showMessage.bind(this);
         this.sortPokemons = this.sortPokemons.bind(this);
     }
@@ -186,7 +188,10 @@ class Pokedex extends React.PureComponent {
 
             this.setPokemonId(randomId);
         } else {
-            this.showMessage('Wait to load all pokemons...', 'left');
+            this.showMessage(
+                'Our lottery machine has not warmed up yet ...',
+                'left'
+            );
         }
     }
 
@@ -250,10 +255,7 @@ class Pokedex extends React.PureComponent {
                 });
             }
         } else {
-            this.showMessage(
-                'Not ready yet! Please wait a few seconds...',
-                'right'
-            );
+            this.showMessage('Some pokemons have not woken up yet...', 'right');
         }
     }
 
@@ -339,10 +341,7 @@ class Pokedex extends React.PureComponent {
                 });
             }
         } else {
-            this.showMessage(
-                'Not ready yet! Please wait a few seconds...',
-                'right'
-            );
+            this.showMessage('Some pokemons have not woken up yet...', 'right');
         }
     }
 
@@ -356,6 +355,26 @@ class Pokedex extends React.PureComponent {
         this.setState({
             isModalOpen: false,
         });
+    }
+
+    saveCurrentPokemon() {
+        const { savedList, pokemonId, loadingProgress } = this.state;
+
+        if (loadingProgress[0]) {
+            const newPokemon = this.getPokemonById(pokemonId);
+            if (savedList.find((el) => el.id === newPokemon.id)) {
+                this.showMessage(`You already catched this pokemon! `, 'left');
+            } else {
+                const newList = [...savedList];
+                newList.push(newPokemon);
+                this.setState({ savedList: newList });
+
+                console.log(newList);
+                this.showMessage('Catched! Now check "Your pokemons"!', 'left');
+            }
+        } else {
+            this.showMessage(`You're too fast, give them a moment...`, 'left');
+        }
     }
 
     render() {
@@ -402,6 +421,7 @@ class Pokedex extends React.PureComponent {
                     prevPokemonId={() => this.setPokemonId(pokemonId - 1)}
                     prevPokemon={this.prevPokemon}
                     random={this.random}
+                    saveCurrentPokemon={this.saveCurrentPokemon}
                     setModalContent={this.setModalContent}
                     showModal={this.showModal}
                 />

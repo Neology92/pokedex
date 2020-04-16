@@ -24,6 +24,7 @@ class Navigation extends React.PureComponent {
             prevPokemon,
             random,
             rightSideComponent,
+            saveCurrentPokemon,
             showModal,
             setModalContent,
         } = this.props;
@@ -33,7 +34,7 @@ class Navigation extends React.PureComponent {
                 <LeftWing>
                     <>{leftSideComponent}</>
                     <GamepadButtonsGroup>
-                        <Pokeball />
+                        <Pokeball onClick={saveCurrentPokemon} />
                         <Button color="#DDCE43" onClick={random}>
                             Random
                         </Button>
@@ -100,6 +101,7 @@ Navigation.propTypes = {
     prevPokemon: PropTypes.func.isRequired,
     random: PropTypes.func.isRequired,
     rightSideComponent: PropTypes.node.isRequired,
+    saveCurrentPokemon: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     setModalContent: PropTypes.func.isRequired,
 };
