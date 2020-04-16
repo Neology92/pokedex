@@ -44,15 +44,11 @@ npm test
 -   [Prop-Types](https://www.npmjs.com/package/prop-types)
 -   [React-Image](https://www.npmjs.com/package/react-image)
 -   [Axios](https://github.com/axios/axios)
-
 #
-
 -   [Prettier](https://prettier.io/)
 -   [Husky](https://www.npmjs.com/package/husky)
 -   [Lint-Staged](https://www.npmjs.com/package/lint-staged)
-
 #
-
 -   [Jest](https://jestjs.io/)
 
 ## License
