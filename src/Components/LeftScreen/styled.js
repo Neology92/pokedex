@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Table from '../Table/Table';
 import Card from '../Card/Card';
 
 const StyledCard = styled(Card)`
@@ -49,4 +50,10 @@ const Name = styled.h2`
     }
 `;
 
-export { Wrapper, Name, StyledCard };
+const StyledTable = styled(Table)`
+    tr th {
+        padding: 6px 100px 6px 0;
+    }
+`;
+
+export { Wrapper, Name, StyledCard, StyledTable };

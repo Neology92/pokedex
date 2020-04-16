@@ -2,10 +2,9 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import Table from '../Table/Table';
 import Picture from '../Picture/Picture';
 import Message from '../Message/Message';
-import { Wrapper, Name, StyledCard } from './styled';
+import { Wrapper, Name, StyledCard, StyledTable } from './styled';
 import setSprite from '../../Utils/setSprite';
 
 const asThreeDigit = (num) => {
@@ -133,7 +132,7 @@ export default class LeftScreen extends PureComponent {
                             placeholder={setSprite(pokemon)}
                         />
 
-                        <Table>
+                        <StyledTable>
                             <tbody>
                                 {pokemonInfo.map(({ name, value }) => (
                                     <tr key={name}>
@@ -142,7 +141,7 @@ export default class LeftScreen extends PureComponent {
                                     </tr>
                                 ))}
                             </tbody>
-                        </Table>
+                        </StyledTable>
 
                         <Message showed={message.show}>{message.text}</Message>
                     </Wrapper>

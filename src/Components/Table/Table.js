@@ -17,9 +17,6 @@ const Table = styled.table`
             padding: 6px 0;
             width: 50%;
         }
-        th {
-            padding: 6px 100px 6px 0;
-        }
 
         ${({ theme }) => theme.media.above.s} {
             th {

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { animateScroll } from 'react-scroll';
 import PropTypes from 'prop-types';
 import PokemonItem from '../PokemonItem/PokemonItem';
 import setSprite from '../../Utils/setSprite';
@@ -7,11 +8,28 @@ import { GridWrapper } from './styled';
 export default class SavedMenu extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            width: 360,
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ width: window.innerWidth });
+    }
+
+    handleClick(id) {
+        const { setPokemonId } = this.props;
+        const { width } = this.state;
+        setPokemonId(id);
+        if (width <= 1000) {
+            animateScroll.scrollTo(150);
+        }
     }
 
     render() {
-        const { savedPokemons, setPokemonId } = this.props;
+        const { savedPokemons } = this.props;
 
         return (
             <div>
@@ -24,7 +42,7 @@ export default class SavedMenu extends PureComponent {
                                     key={pokemon.id}
                                     sprite={setSprite(pokemon)}
                                     name={pokemon.name}
-                                    onClick={() => setPokemonId(pokemon.id)}
+                                    onClick={() => this.handleClick(pokemon.id)}
                                 />
                             ))}
                         </GridWrapper>

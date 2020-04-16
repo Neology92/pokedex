@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DropdownInput from '../DropdownInput/DropdownInput';
 import Button from '../Button/Button';
 import pokeApiQuery from '../../Utils/pokeApiQuery';
-import { StyledTable } from './styled';
+import Table from '../Table/Table';
 
 const fieldNames = [
     'type',
@@ -118,7 +118,7 @@ export default class FilterMenu extends PureComponent {
         const { filters, options } = this.state;
 
         return (
-            <StyledTable>
+            <Table>
                 <tbody>
                     {fieldNames.map((key) => (
                         <tr key={key}>
@@ -152,7 +152,7 @@ export default class FilterMenu extends PureComponent {
                         </td>
                     </tr>
                 </tbody>
-            </StyledTable>
+            </Table>
         );
     }
 }

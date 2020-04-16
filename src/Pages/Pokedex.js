@@ -375,6 +375,7 @@ class Pokedex extends React.PureComponent {
             } else {
                 const newList = [...savedPokemons];
                 newList.push(newPokemon);
+
                 this.setState({ savedPokemons: newList });
 
                 console.log(newList);

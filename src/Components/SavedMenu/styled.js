@@ -11,11 +11,11 @@ const GridWrapper = styled.div`
     grid-row-gap: 10px;
 
     ${({ theme }) => theme.media.above.s} {
-        grid-template-columns: repeat(3, 80px);
         grid-column-gap: 20px;
     }
 
     ${({ theme }) => theme.media.above.m} {
+        grid-template-columns: repeat(3, 80px);
         grid-column-gap: calc(4.55vw - 30px);
     }
 
