@@ -21,6 +21,8 @@ class Navigation extends React.PureComponent {
             leftSideComponent,
             nextPokemonId,
             prevPokemonId,
+            next10PokemonId,
+            prev10PokemonId,
             prevPokemon,
             random,
             rightSideComponent,
@@ -51,7 +53,10 @@ class Navigation extends React.PureComponent {
                             Previous
                         </Button>
                         <CrossButtons>
-                            <ArrowButton direction="top" />
+                            <ArrowButton
+                                direction="top"
+                                onClick={next10PokemonId}
+                            />
                             <ArrowButton
                                 direction="left"
                                 onClick={prevPokemonId}
@@ -61,7 +66,10 @@ class Navigation extends React.PureComponent {
                                 direction="right"
                                 onClick={nextPokemonId}
                             />
-                            <ArrowButton direction="bottom" />
+                            <ArrowButton
+                                direction="bottom"
+                                onClick={prev10PokemonId}
+                            />
                         </CrossButtons>
                     </GamepadButtonsGroup>
                 </LeftWing>
@@ -98,6 +106,8 @@ Navigation.propTypes = {
     leftSideComponent: PropTypes.node.isRequired,
     nextPokemonId: PropTypes.func.isRequired,
     prevPokemonId: PropTypes.func.isRequired,
+    next10PokemonId: PropTypes.func.isRequired,
+    prev10PokemonId: PropTypes.func.isRequired,
     prevPokemon: PropTypes.func.isRequired,
     random: PropTypes.func.isRequired,
     rightSideComponent: PropTypes.node.isRequired,

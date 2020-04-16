@@ -419,6 +419,8 @@ class Pokedex extends React.PureComponent {
                             modalContent={modalContent}
                         />
                     }
+                    next10PokemonId={() => this.setPokemonId(pokemonId + 10)}
+                    prev10PokemonId={() => this.setPokemonId(pokemonId - 10)}
                     nextPokemonId={() => this.setPokemonId(pokemonId + 1)}
                     prevPokemonId={() => this.setPokemonId(pokemonId - 1)}
                     prevPokemon={this.prevPokemon}
