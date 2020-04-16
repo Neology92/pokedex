@@ -1,4 +1,5 @@
 import React from 'react';
+import { animateScroll } from 'react-scroll';
 import PropTypes from 'prop-types';
 import {
     LeftWing,
@@ -16,6 +17,33 @@ import {
 } from './styled';
 
 class Navigation extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            width: 360,
+        };
+
+        this.handleClickSavedPokemons = this.handleClickSavedPokemons.bind(
+            this
+        );
+    }
+
+    componentDidMount() {
+        this.setState({ width: window.innerWidth });
+    }
+
+    handleClickSavedPokemons() {
+        const { showModal, setModalContent } = this.props;
+        const { width } = this.state;
+
+        setModalContent('saved');
+        showModal();
+
+        if (width <= 1000) {
+            animateScroll.scrollTo(1035);
+        }
+    }
+
     render() {
         const {
             leftSideComponent,
@@ -42,10 +70,7 @@ class Navigation extends React.PureComponent {
                         </Button>
                         <Button
                             color="#FB2EFF"
-                            onClick={() => {
-                                setModalContent('saved');
-                                showModal();
-                            }}
+                            onClick={this.handleClickSavedPokemons}
                         >
                             Your Pokemons
                         </Button>
