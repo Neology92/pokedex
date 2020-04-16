@@ -16,7 +16,12 @@ export default class RightScreen extends PureComponent {
     }
 
     displayModalContent(content) {
-        const { filterPokemons, sortPokemons } = this.props;
+        const {
+            filterPokemons,
+            sortPokemons,
+            savedPokemons,
+            setPokemonId,
+        } = this.props;
 
         return (
             <>
@@ -41,7 +46,10 @@ export default class RightScreen extends PureComponent {
                         display: `${content === 'saved' ? 'inherit' : 'none'}`,
                     }}
                 >
-                    <SavedMenu />
+                    <SavedMenu
+                        savedPokemons={savedPokemons}
+                        setPokemonId={setPokemonId}
+                    />
                 </div>
             </>
         );
@@ -95,6 +103,7 @@ RightScreen.propTypes = {
     maxPage: PropTypes.number.isRequired,
     setPage: PropTypes.func.isRequired,
     pokemonsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    savedPokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
     isReady: PropTypes.bool.isRequired,
     setPokemonId: PropTypes.func.isRequired,
     message: PropTypes.shape({

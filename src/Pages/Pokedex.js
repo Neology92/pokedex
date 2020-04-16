@@ -15,7 +15,7 @@ class Pokedex extends React.PureComponent {
             pokemonsList: [],
             pokemonsDisplayList: [],
             speciesList: [],
-            savedList: [],
+            savedPokemons: [],
             loadingProgress: [false, false, false],
             page: 1,
             maxPage: 1,
@@ -30,7 +30,7 @@ class Pokedex extends React.PureComponent {
                 },
             },
             isModalOpen: false,
-            modalContent: 'filter',
+            modalContent: '',
         };
 
         this.showModal = this.showModal.bind(this);
@@ -358,16 +358,16 @@ class Pokedex extends React.PureComponent {
     }
 
     saveCurrentPokemon() {
-        const { savedList, pokemonId, loadingProgress } = this.state;
+        const { savedPokemons, pokemonId, loadingProgress } = this.state;
 
         if (loadingProgress[0]) {
             const newPokemon = this.getPokemonById(pokemonId);
-            if (savedList.find((el) => el.id === newPokemon.id)) {
+            if (savedPokemons.find((el) => el.id === newPokemon.id)) {
                 this.showMessage(`You already catched this pokemon! `, 'left');
             } else {
-                const newList = [...savedList];
+                const newList = [...savedPokemons];
                 newList.push(newPokemon);
-                this.setState({ savedList: newList });
+                this.setState({ savedPokemons: newList });
 
                 console.log(newList);
                 this.showMessage('Catched! Now check "Your pokemons"!', 'left');
@@ -382,6 +382,7 @@ class Pokedex extends React.PureComponent {
             pokemonId,
             pokemonsDisplayList,
             speciesList,
+            savedPokemons,
             loadingProgress,
             page,
             maxPage,
@@ -408,6 +409,7 @@ class Pokedex extends React.PureComponent {
                             maxPage={maxPage}
                             page={page}
                             pokemonsList={pokemonsDisplayList}
+                            savedPokemons={savedPokemons}
                             setPage={this.setPage}
                             setPokemonId={this.setPokemonId}
                             sortPokemons={this.sortPokemons}
