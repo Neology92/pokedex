@@ -11,7 +11,7 @@ class Pokedex extends React.PureComponent {
         super(props);
         this.state = {
             pokemonId: 1,
-            prevPokemon: 1,
+            prevPokemonsList: [],
             pokemonsList: [],
             pokemonsDisplayList: [],
             speciesList: [],
@@ -78,7 +78,10 @@ class Pokedex extends React.PureComponent {
         const { pokemonId, loadingProgress } = this.state;
         if (loadingProgress[0]) {
             if (this.getPokemonById(newId)) {
-                this.setState({ prevPokemon: pokemonId });
+                const { prevPokemonsList } = this.state;
+                prevPokemonsList.push(pokemonId);
+                this.setState({ prevPokemonsList });
+
                 this.setState({ pokemonId: newId });
             }
         } else {
@@ -169,8 +172,13 @@ class Pokedex extends React.PureComponent {
     }
 
     prevPokemon() {
-        const { prevPokemon } = this.state;
-        this.setPokemonId(prevPokemon);
+        const { prevPokemonsList } = this.state;
+        if (prevPokemonsList.length) {
+            this.setState({ pokemonId: prevPokemonsList.pop() });
+            this.setState({ prevPokemonsList });
+        } else {
+            this.showMessage('Oups, there is no previous pokemon', 'left');
+        }
     }
 
     random() {
