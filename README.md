@@ -39,26 +39,21 @@ The goal was to create an **interactive, responsive Pokédex application** using
 ### Installation
 
 1. Install packages:
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
-2. Start development server:
-\`\`\`bash
+3. Start development server:
+```bash
 npm start
-\`\`\`
+```
 
 Or build the project:
-\`\`\`bash
+```bash
 npm build
 open ./dist/index.html
-\`\`\`
+```
 
-### Running Tests
-
-\`\`\`bash
-npm test
-\`\`\`
 
 ## Lessons Learned
 
@@ -73,17 +68,13 @@ Today, with more experience, I recognize several areas for improvement:
 
 - **Performance Optimization:**  
   The app currently fetches a large amount of data on load, leading to sluggishness.  
-  Today, I'd use smarter data fetching strategies to avoid the **n+1 problem**.
+  Today, I'd use smarter data fetching strategies.
 
 - **Testing Strategy:**  
   I would add unit tests, integration tests, and use modern libraries like **React Testing Library**.
 
-- **Modern Tools:**  
-  In 2025, tools like **TanStack Query** (ex-React Query), **Vite**, and **SWC** have become industry standards, which I would definitely adopt.
-
-This project reflects my early journey into front-end development, and how much I've grown since then.
+This project reflects my early journey into front-end development.
 
 ## License
 
 Distributed under the MIT License.  
-See \`LICENSE\` for more information.
