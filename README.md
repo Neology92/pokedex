@@ -1,56 +1,89 @@
-# Allegro Recruitment Task Answer
+# Allegro Recruitment Task - Pokédex App
 
-**Apply for: FRONT-END SOFTWARE ENGINEER - Intern**  
-**City: Poznań**
+**Apply :** Front-End Software Engineer Intern  
+**City:** Poznań  
+**Year:** 2020
 
----
+![Hero Image](https://github.com/user-attachments/assets/2443bf06-3ae2-478d-b41e-9de80b1d85cc)
 
-This application is been createt due to allegro recruitment task - Pokedex.
+## About The Project
+
+This project was developed as part of a recruitment task for Allegro's Front-End Internship Program.  
+The goal was to create an **interactive, responsive Pokédex application** using **React.js**, powered by the [PokeAPI](https://pokeapi.co/).
+![Mobile View Screensho1](https://github.com/user-attachments/assets/456659a2-51bc-47a7-bbe6-d1b3a6e4fe5f)
+![Mobile View Screenshot2](https://github.com/user-attachments/assets/d10379fa-3228-4df0-8429-b52fba081990)
+
+## Features
+
+- Browse a list of Pokémon
+- View detailed Pokémon information
+- Responsive mobile-first design
+- Smooth scrolling between sections
+- Image lazy-loading
+- Styled using **Styled-Components**
+
+## Built With
+
+- React.js
+- Webpack
+- Babel
+- Styled-Components
+- React-Scroll
+- React-Image
+- Axios
+- Prettier, Husky, Lint-Staged (code quality)
+- Jest (testing)
 
 ## Getting Started
 
-Install all packages.
+### Installation
 
-```bash
+1. Install packages:
+\`\`\`bash
 npm install
-```
+\`\`\`
 
-Simply run webpack dev server, and check running app on localhost:3000/
-
-```bash
+2. Start development server:
+\`\`\`bash
 npm start
-```
+\`\`\`
 
-You can also build app and open it as index.html file in /dist folder
-
-```bash
+Or build the project:
+\`\`\`bash
 npm build
-./dist/index.html
-```
+open ./dist/index.html
+\`\`\`
 
-## Running the tests
+### Running Tests
 
-```bash
+\`\`\`bash
 npm test
-```
+\`\`\`
 
-## Built with
+## Lessons Learned
 
--   [React](https://reactjs.org/)
--   [Webpack](https://webpack.js.org/)
--   [Babel](https://babeljs.io/)
--   [Styled-Components](https://styled-components.com/)
--   [React-Scroll](https://www.npmjs.com/package/react-scroll)
--   [Prop-Types](https://www.npmjs.com/package/prop-types)
--   [React-Image](https://www.npmjs.com/package/react-image)
--   [Axios](https://github.com/axios/axios)
-#
--   [Prettier](https://prettier.io/)
--   [Husky](https://www.npmjs.com/package/husky)
--   [Lint-Staged](https://www.npmjs.com/package/lint-staged)
-#
--   [Jest](https://jestjs.io/)
+This was one of my first larger React projects.  
+Today, with more experience, I recognize several areas for improvement:
+
+- **Component Architecture:**  
+  I would now prefer function components and hooks instead of class components.
+
+- **State Management:**  
+  Introducing **Redux Toolkit** would help avoid props drilling and manage state more effectively.
+
+- **Performance Optimization:**  
+  The app currently fetches a large amount of data on load, leading to sluggishness.  
+  Today, I'd use smarter data fetching strategies to avoid the **n+1 problem**.
+
+- **Testing Strategy:**  
+  I would add unit tests, integration tests, and use modern libraries like **React Testing Library**.
+
+- **Modern Tools:**  
+  In 2025, tools like **TanStack Query** (ex-React Query), **Vite**, and **SWC** have become industry standards, which I would definitely adopt.
+
+This project reflects my early journey into front-end development, and how much I've grown since then.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Distributed under the MIT License.  
+See \`LICENSE\` for more information.
